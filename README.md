@@ -1,4 +1,14 @@
-# Project Skeleton Top-level
+# fp-voterapp
+
+The purpose of this application is to package publicly available Voter Registration data,
+along with GIS mapping tool in order to allow political organizers to identify and reach out to their voting base in the most efficient ways possible. The features provided by this tool includes:
+  - Easy-to-use functions for creating "walk-lists" for canvassers based on location. For example, draw a
+square on a city map that generates a list of addresses of registered Democrats within that area.
+  - "Contact management" features, allowing teams to track engagement with current and potential
+supporters.
+  - Social media integration
+
+View the app [here](https://git.heroku.com/safe-lake-95812.git).
 
 This repository combines the client and server into a single repository that can be co-developed, tested and ultimately deployed to Heroku or basin.cs.middlebury.edu.
 
