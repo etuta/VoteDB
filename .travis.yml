@@ -17,5 +17,6 @@ script:
   - npm test --prefix server
   - npm run lint --prefix server
   - npm run build --prefix client
-  env:
-   MY_SECRET=test
+env:
+  jobs:
+    - MY_SECRET=test

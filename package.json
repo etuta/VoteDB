@@ -2,7 +2,7 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
-  "description": "Describe your project",
+  "description": "The purpose of Voter Access Networks is to package publicly available Voter Registration data along with GIS mapping tool in order to allow political organizers to identify and reach out to their voting base.",
   "engines": {
     "node": "12.14.x"
   },
@@ -18,10 +18,10 @@
   ],
   "keywords": [],
   "contributors": [
-    "Student1 <student1@middlebury.edu>",
-    "Student2 <student2@middlebury.edu>",
-    "Student3 <student2@middlebury.edu>",
-    "Student4 <student3@middlebury.edu>",
+    "Student1 <rbabu@middlebury.edu>",
+    "Student2 <williamk@middlebury.edu>",
+    "Student3 <eosorio@middlebury.edu>",
+    "Student4 <etuta@middlebury.edu>",
     "Student5 <student4@middlebury.edu>",
     "Student6 <student5@middlebury.edu>",
     "Student7 <student6@middlebury.edu>"
