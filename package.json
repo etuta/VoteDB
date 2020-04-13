@@ -45,11 +45,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "google-maps-react": "^2.0.2",
     "mdbreact": "^4.25.5",
     "react-bootstrap": "^1.0.0",
+    "react-google-maps": "^9.4.5",
     "react-native": "^0.62.2",
     "reactstrap": "^8.4.1",
     "save": "^2.4.0",
+    "styled": "^1.0.0",
     "styled-components": "^5.1.0"
   }
 }
