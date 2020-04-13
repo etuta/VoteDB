@@ -42,5 +42,14 @@
     "{client/src,server}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "mdbreact": "^4.25.5",
+    "react-bootstrap": "^1.0.0",
+    "react-native": "^0.62.2",
+    "reactstrap": "^8.4.1",
+    "save": "^2.4.0",
+    "styled-components": "^5.1.0"
   }
 }
