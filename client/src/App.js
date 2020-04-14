@@ -81,7 +81,7 @@ const App = () => {
               margin-right="40px"
               variant="Search on the Map"
             >
-              Select on the Map
+              Select location on the Map
             </button>{" "}
             <button
               onClick={() => {
