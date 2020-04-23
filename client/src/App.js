@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, Component } from "react";
-// import Accordion from 'react-bootstrap/Accordion'
-// import Card from 'react-bootstrap/Card'
 import Popover from "react-bootstrap/Popover";
 import Overlay from "react-bootstrap/Overlay";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Map, GoogleApiWrapper } from "google-maps-react";
-//import logo from "./logo.svg";
 import "./App.css";
 import styled from "styled-components";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import Location from "./Location";
 
 import {
   Container,
@@ -21,6 +20,10 @@ import {
   DropdownItem
 } from "reactstrap";
 
+//Default Coordinates
+const default_longitude = -122.4194;
+const default_latitude = 37.7749;
+
 import { MDBCol, MDBInput } from "mdbreact";
 const Button = styled.button``;
 
@@ -29,27 +32,25 @@ const mapStyles = {
   height: "100%"
 };
 
-/* const MapContainer =  (props) => {
-       return (<Map
-        google={props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={{
-         lat: -1.2884,
-         lng: 36.8233
-        }}
-      />);
-    }; */
-
 const App = () => {
   const [target, setTarget] = useState(null);
   const [dropdownOpen, setOpen] = useState(false);
+  const [mapCollection, setMapCollection] = useState([]);
   const [currentDropdown, setCurrentDropdown] = useState("");
 
   const toggle = dropdown => setCurrentDropdown(dropdown);
 
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
+
+  const locateUser = {
+    //Locate user button 
+    position: "topright",
+    strings: {
+      title: "Go to location"
+    },
+    onActivate: () => {}
+  };
 
   //  const target = useRef(null);
   const ref = useRef(null);
@@ -58,7 +59,22 @@ const App = () => {
     setShow(!show);
     setTarget(event.target);
   };
-
+  
+  const handleMapClick = click => {
+    //User can choose any five points on the map
+    if (mapCollection.length <= 4) {
+      const updatedMapCollection = mapCollection;
+      updatedMapCollection.push([click.latlng.lat, click.latlng.lng]);
+      setMapCollection(updatedMapCollection);
+      alert(mapCollection);
+    } else {
+      alert("5 points already chosen");
+    }
+  };
+  
+  const handleSearchLocation = input => {};
+  //Just a placeholder for search button 
+  
   return (
     <Container>
       <div className="App">
@@ -178,6 +194,24 @@ const App = () => {
             </Row>
           )}
         </>
+        <textarea
+          type="text"
+          size="45"
+          position="left"
+          placeholder="Search location..."
+          onClick={event => handleSearchLocation(event.target.value)}
+        />
+      <Map
+        center={[default_latitude, default_longitude]}
+        zoom={12}
+        onClick={handleMapClick}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Location options={locateUser} />
+      </Map>
       </div>
     </Container>
   );
