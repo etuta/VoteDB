@@ -44,8 +44,9 @@ const mapStyles = {
 const App = () => {
   const [target, setTarget] = useState(null);
   const [dropdownOpen, setOpen] = useState(false);
+  const [currentDropdown, setCurrentDropdown] = useState("");
 
-  const toggle = () => setOpen(!dropdownOpen);
+  const toggle = dropdown => setCurrentDropdown(dropdown);
 
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
@@ -99,7 +100,10 @@ const App = () => {
             <Row margin-top="100px">
               <Col sm={{ size: "auto", offset: 8 }}>
                 <ListGroup>
-                  <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <ButtonDropdown
+                    isOpen={currentDropdown === "1"}
+                    toggle={setCurrentDropdown.bind(this, "1")}
+                  >
                     <DropdownToggle caret>Party Affiliation</DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem>Democrat</DropdownItem>
@@ -108,7 +112,10 @@ const App = () => {
                     </DropdownMenu>
                   </ButtonDropdown>
 
-                  <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <ButtonDropdown
+                    isOpen={currentDropdown === "2"}
+                    toggle={setCurrentDropdown.bind(this, "2")}
+                  >
                     <DropdownToggle caret>Registration Status</DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem> Registered </DropdownItem>
@@ -116,7 +123,10 @@ const App = () => {
                     </DropdownMenu>
                   </ButtonDropdown>
 
-                  <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <ButtonDropdown
+                    isOpen={currentDropdown === "3"}
+                    toggle={setCurrentDropdown.bind(this, "3")}
+                  >
                     <DropdownToggle caret>Age Range</DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem> 18-25 </DropdownItem>
@@ -128,7 +138,10 @@ const App = () => {
                     </DropdownMenu>
                   </ButtonDropdown>
 
-                  <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <ButtonDropdown
+                    isOpen={currentDropdown === "4"}
+                    toggle={setCurrentDropdown.bind(this, "4")}
+                  >
                     <DropdownToggle caret> Race </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem>
@@ -146,7 +159,10 @@ const App = () => {
                     </DropdownMenu>
                   </ButtonDropdown>
 
-                  <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <ButtonDropdown
+                    isOpen={currentDropdown === "5"}
+                    toggle={setCurrentDropdown.bind(this, "5")}
+                  >
                     <DropdownToggle caret>
                       {" "}
                       Socioeconomic status{" "}
