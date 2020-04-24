@@ -4,7 +4,7 @@ import Locate from "leaflet.locatecontrol";
 
 const LocateControl = props => {
   useEffect(() => {
-    const { options, startDirectly } = props;
+    const { options } = props;
     const { map } = props.leaflet;
 
     const location = new Locate(options);
