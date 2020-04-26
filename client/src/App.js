@@ -5,8 +5,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./App.css";
 import styled from "styled-components";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { TileLayer, Marker, Popup } from "react-leaflet";
 import Location from "./Location";
+import { MDBCol, MDBInput } from "mdbreact";
 
 import {
   Container,
@@ -24,7 +25,6 @@ import {
 const default_longitude = -122.4194;
 const default_latitude = 37.7749;
 
-import { MDBCol, MDBInput } from "mdbreact";
 const Button = styled.button``;
 
 const mapStyles = {
@@ -44,7 +44,7 @@ const App = () => {
   const [mode, setMode] = useState("view");
 
   const locateUser = {
-    //Locate user button 
+    //Locate user button
     position: "topright",
     strings: {
       title: "Go to location"
@@ -59,7 +59,7 @@ const App = () => {
     setShow(!show);
     setTarget(event.target);
   };
-  
+
   const handleMapClick = click => {
     //User can choose any five points on the map
     if (mapCollection.length <= 4) {
@@ -71,10 +71,10 @@ const App = () => {
       alert("5 points already chosen");
     }
   };
-  
+
   const handleSearchLocation = input => {};
-  //Just a placeholder for search button 
-  
+  //Just a placeholder for search button
+
   return (
     <Container>
       <div className="App">
@@ -194,14 +194,17 @@ const App = () => {
             </Row>
           )}
         </>
-        <textarea
-          type="text"
-          size="45"
-          position="left"
-          placeholder="Search location..."
-          onClick={event => handleSearchLocation(event.target.value)}
-        />
+      </div>
+
+      <textarea
+        type="text"
+        size="45"
+        position="left"
+        placeholder="Search location..."
+        onClick={event => handleSearchLocation(event.target.value)}
+      />
       <Map
+        google={window.google}
         center={[default_latitude, default_longitude]}
         zoom={12}
         onClick={handleMapClick}
@@ -212,7 +215,6 @@ const App = () => {
         />
         <Location options={locateUser} />
       </Map>
-      </div>
     </Container>
   );
 };
