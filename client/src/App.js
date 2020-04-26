@@ -5,7 +5,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 // import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./App.css";
 import styled from "styled-components";
-import { TileLayer, Marker, Popup } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Location from "./Location";
 import { MDBCol, MDBInput } from "mdbreact";
 

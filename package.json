@@ -47,6 +47,7 @@
     "bootstrap": "^4.4.1",
     "google-maps-react": "^2.0.6",
     "leaflet": "^1.6.0",
+    "map": "^1.0.1",
     "mdbreact": "^4.25.5",
     "react-bootstrap": "^1.0.0",
     "react-google-maps": "^9.4.5",
