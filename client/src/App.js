@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, Component } from "react";
 import Popover from "react-bootstrap/Popover";
 import Overlay from "react-bootstrap/Overlay";
 import Tooltip from "react-bootstrap/Tooltip";
-import { Map, GoogleApiWrapper } from "google-maps-react";
+// import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./App.css";
 import styled from "styled-components";
 import { TileLayer, Marker, Popup } from "react-leaflet";
@@ -36,6 +36,7 @@ const App = () => {
   const [target, setTarget] = useState(null);
   const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentDropdown, setCurrentDropdown] = useState("");
 
   const toggle = dropdown => setCurrentDropdown(dropdown);
@@ -66,14 +67,14 @@ const App = () => {
       const updatedMapCollection = mapCollection;
       updatedMapCollection.push([click.latlng.lat, click.latlng.lng]);
       setMapCollection(updatedMapCollection);
-      alert(mapCollection);
     } else {
       alert("5 points already chosen");
     }
   };
 
-  const handleSearchLocation = input => {};
-  //Just a placeholder for search button
+  const handleSearchLocation = () => {
+    alert("Going to " + searchQuery);
+  };
 
   return (
     <Container>
@@ -194,27 +195,35 @@ const App = () => {
             </Row>
           )}
         </>
-      </div>
-
-      <textarea
-        type="text"
-        size="45"
-        position="left"
-        placeholder="Search location..."
-        onClick={event => handleSearchLocation(event.target.value)}
-      />
-      <Map
-        google={window.google}
-        center={[default_latitude, default_longitude]}
-        zoom={12}
-        onClick={handleMapClick}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        <input
+          type="text"
+          size="40"
+          position="topleft"
+          value={searchQuery.value}
+          placeholder="Look up location..."
+          onClick={event => setSearchQuery(event.target.value)}
         />
-        <Location options={locateUser} />
-      </Map>
+        <input
+          type="button"
+          disabled={!searchQuery}
+          onClick={() => {
+            handleSearchLocation();
+          }}
+          value="Search"
+        />
+        <Map
+          google={window.google}
+          center={[default_latitude, default_longitude]}
+          zoom={12}
+          onClick={handleMapClick}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <Location options={locateUser} />
+        </Map>
+      </div>
     </Container>
   );
 };
