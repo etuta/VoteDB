@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Location from "./Location";
 import { MDBCol, MDBInput } from "mdbreact";
+import { List } from "immutable";
+
 
 import {
   Container,
@@ -44,6 +46,14 @@ const App = () => {
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
 
+  const [voters, setVoters] = useState(List());
+  const [partyFilter, setPartyFilter] = useState(null);
+  const [registrationFilter, setRegistrationFilter] = useState(null);
+  const [ageFilter, setAgeFilter] = useState(null);
+  const [raceFilter, setRaceFilter] = useState(null);
+  const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
+
+
   const locateUser = {
     //Locate user button
     position: "topright",
@@ -75,6 +85,33 @@ const App = () => {
   const handleSearchLocation = () => {
     alert("Going to " + searchQuery);
   };
+
+  useEffect(() => {
+    const fetchData = () => {
+      fetch('/api/voters/')
+        .then(response => {
+          console.log('Here ajghg jhajhvj jhajvgav hjhbjh');
+          if (!response.ok) {
+            throw new Error(response.status_text);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setVoters(List(data));
+          console.log(voters);
+        })
+        .catch(err => console.log(err)); // eslint-disable-line no-console
+    };
+    fetchData();
+  }, []);
+
+  const filteredVoters = voters.filter (voter =>
+     voter.party === partyFilter)
+     .filter(voter => voter.registrationStatus === registrationFilter)
+     .filter(voter => voter.ageRange === ageFilter)
+     .filter(voter => voter.race === raceFilter)
+     .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
+
 
   return (
     <Container>
@@ -121,13 +158,13 @@ const App = () => {
                     isOpen={currentDropdown === "1"}
                     toggle={setCurrentDropdown.bind(this, "1")}
                   >
-                    <DropdownToggle caret>Party Affiliation</DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Democrat</DropdownItem>
-                      <DropdownItem>Republican</DropdownItem>
-                      <DropdownItem>Independent</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
+                  <DropdownToggle caret>Party Affiliation</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={()=> {setPartyFilter("Democrat")}}>Democrat</DropdownItem>
+                    <DropdownItem onClick={()=> {setPartyFilter("Republican")}}>Republican</DropdownItem>
+                    <DropdownItem onClick={()=> {setPartyFilter("Independent")}}>Independent</DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
 
                   <ButtonDropdown
                     isOpen={currentDropdown === "2"}
@@ -135,8 +172,8 @@ const App = () => {
                   >
                     <DropdownToggle caret>Registration Status</DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem> Registered </DropdownItem>
-                      <DropdownItem>Not Registered </DropdownItem>
+                    <DropdownItem onClick={()=> {setRegistrationFilter("Registered")}}> Registered </DropdownItem>
+                    <DropdownItem onClick={()=> {setRegistrationFilter("Not Registered")}}>Not Registered </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -146,12 +183,12 @@ const App = () => {
                   >
                     <DropdownToggle caret>Age Range</DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem> 18-25 </DropdownItem>
-                      <DropdownItem> 25-35 </DropdownItem>
-                      <DropdownItem> 35-50 </DropdownItem>
-                      <DropdownItem> 50-70 </DropdownItem>
-                      <DropdownItem> 70-90 </DropdownItem>
-                      <DropdownItem> 90+ </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("18-25")}}> 18-25 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("25-35")}}> 25-35 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("35-50")}}> 35-50 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("50-70")}}> 50-70 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("70-90")}}> 70-90 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("90-110")}}> 90-110 </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -161,18 +198,12 @@ const App = () => {
                   >
                     <DropdownToggle caret> Race </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem>
-                        {" "}
-                        American Indian or Alaska Native{" "}
-                      </DropdownItem>
-                      <DropdownItem> Asian </DropdownItem>
-                      <DropdownItem> Black or African American </DropdownItem>
-                      <DropdownItem> Hispanic or Latino </DropdownItem>
-                      <DropdownItem>
-                        {" "}
-                        Native Hawaiian or Other Pacific Islander{" "}
-                      </DropdownItem>
-                      <DropdownItem> White </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("American Indian or Alaska Native")}}> American Indian or Alaska Native </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Asian")}}> Asian </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Black or African American")}}> Black or African American </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Hispanic or Latino")}}> Hispanic or Latino </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Native Hawaiian or Other Pacific Islander")}}> Native Hawaiian or Other Pacific Islander </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("White")}}> White </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -185,9 +216,9 @@ const App = () => {
                       Socioeconomic status{" "}
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem> Low </DropdownItem>
-                      <DropdownItem> Medium </DropdownItem>
-                      <DropdownItem> High </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("Low")}}> Low </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("Medium")}}> Medium </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("High")}}> High </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
                 </ListGroup>
