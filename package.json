@@ -1,5 +1,5 @@
-
-{"name": "project",
+{
+  "name": "project",
   "version": "0.1.0",
   "private": true,
   "description": "The purpose of Voter Access Networks is to package publicly available Voter Registration data along with GIS mapping tool in order to allow political organizers to identify and reach out to their voting base.",
@@ -49,6 +49,7 @@
     "leaflet": "^1.6.0",
     "map": "^1.0.1",
     "mdbreact": "^4.25.5",
+    "react-geocode": "^0.2.1",
     "react-google-maps": "^9.4.5",
     "react-leaflet": "^2.6.3",
     "react-native": "^0.62.2",

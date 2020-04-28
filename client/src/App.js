@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef, Component } from "react";
-import Popover from "react-bootstrap/Popover";
-import Overlay from "react-bootstrap/Overlay";
-import Tooltip from "react-bootstrap/Tooltip";
 import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
@@ -42,7 +39,8 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchPerson, setSearchPerson] = useState("");
   const [currentDropdown, setCurrentDropdown] = useState("");
-  const [voters, setVoters] = useState(data);
+  const [voters, setVoters] = useState(List());
+
 
   const fetchVoters = () => {
     fetch(`/api/voters`)
@@ -73,7 +71,6 @@ const App = () => {
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
 
-  const [voters, setVoters] = useState(List());
   const [partyFilter, setPartyFilter] = useState(null);
   const [registrationFilter, setRegistrationFilter] = useState(null);
   const [ageFilter, setAgeFilter] = useState(null);
