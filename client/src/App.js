@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, Component } from "react";
 import Popover from "react-bootstrap/Popover";
 import Overlay from "react-bootstrap/Overlay";
 import Tooltip from "react-bootstrap/Tooltip";
-// import { Map, GoogleApiWrapper } from "google-maps-react";
+import data from "./seed.json";
+import Geocode from "react-geocode";
 import "./App.css";
 import styled from "styled-components";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
@@ -21,9 +22,9 @@ import {
   DropdownItem
 } from "reactstrap";
 
-//Default Coordinates
-const default_longitude = -122.4194;
-const default_latitude = 37.7749;
+Geocode.setLanguage("en");
+Geocode.setApiKey("AIzaSyDvsbOnTX_TwqyfQwlzzHCpm_ErpQHDMCo");
+//Private API Key
 
 const Button = styled.button``;
 
@@ -37,7 +38,33 @@ const App = () => {
   const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchPerson, setSearchPerson] = useState("");
   const [currentDropdown, setCurrentDropdown] = useState("");
+  const [voters, setVoters] = useState(data);
+
+  const fetchVoters = () => {
+    fetch(`/api/voters`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.status_text);
+        }
+        console.log(response);
+        return response.json();
+      })
+      .then(data => {
+        setVoters(data);
+      })
+      .catch(err => console.log(err)); // eslint-disable-line no-console
+  };
+
+  useEffect(() => {
+    fetchVoters();
+  }, []);
+
+  //Default: overview of North America
+  const [latitude, setLatitude] = useState(54.526);
+  const [longitude, setLongitude] = useState(-105.2551);
+  const [zoom, setZoom] = useState(3);
 
   const toggle = dropdown => setCurrentDropdown(dropdown);
 
@@ -73,7 +100,44 @@ const App = () => {
   };
 
   const handleSearchLocation = () => {
-    alert("Going to " + searchQuery);
+    if (searchQuery) {
+      Geocode.fromAddress(searchQuery).then(
+        response => {
+          const { lat, lng } = response.results[0].geometry.location;
+          setLatitude(lat);
+          setLongitude(lng);
+          setZoom(12);
+        },
+        error => {
+          console.error("Please enter valid address");
+        }
+      );
+    } else {
+      alert("I'm sorry, I can't find the place you are looking for");
+    }
+    setSearchQuery(""); //Resets
+  };
+
+  const handleSearchPerson = () => {
+    if (searchPerson) {
+      const person = voters.find(voter => voter.name === searchPerson);
+      if (person) {
+        Geocode.fromAddress(person.address).then(
+          response => {
+            const { lat, lng } = response.results[0].geometry.location;
+            setLatitude(lat);
+            setLongitude(lng);
+            setZoom(12);
+          },
+          error => {
+            console.error("Please enter valid name");
+          }
+        );
+      } else {
+        alert("I'm sorry, I can't find the person you are looking for");
+      }
+    }
+    setSearchPerson(""); //Resets
   };
 
   return (
@@ -82,7 +146,6 @@ const App = () => {
         <header className="App-header">
           <h1 className="App-title">Voter App</h1>
         </header>
-
         <p className="App-intro">Main page of the app</p>
         <>
           <Row>
@@ -90,16 +153,54 @@ const App = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="Search by Location"
+                value={searchQuery.value}
+                placeholder="Look up location..."
                 aria-label="Search location"
+                onClick={event => setSearchQuery(event.target.value)}
               />
             </MDBCol>
             <button
-              onClick={handleClick}
+              disabled={!searchQuery}
+              onClick={() => {
+                handleSearchLocation();
+              }}
               margin-right="40px"
               variant="Search on the Map"
             >
-              Select location on the Map
+              Search
+            </button>{" "}
+            <button
+              onClick={() => {
+                setMode("filter");
+              }}
+              margin-left="400px"
+              variant="Search by Filters:"
+            >
+              {" "}
+              Search by Filters{" "}
+            </button>{" "}
+          </Row>
+          <p></p>
+          <Row>
+            <MDBCol md="8">
+              <input
+                className="form-control"
+                type="text"
+                value={searchPerson.value}
+                placeholder="To look up a person, please enter first and last name..."
+                aria-label="Search person"
+                onClick={event => setSearchPerson(event.target.value)}
+              />
+            </MDBCol>
+            <button
+              disabled={!searchPerson}
+              onClick={() => {
+                handleSearchPerson();
+              }}
+              margin-right="40px"
+              variant="Search on the Map"
+            >
+              Search
             </button>{" "}
             <button
               onClick={() => {
@@ -195,26 +296,11 @@ const App = () => {
             </Row>
           )}
         </>
-        <input
-          type="text"
-          size="40"
-          position="topleft"
-          value={searchQuery.value}
-          placeholder="Look up location..."
-          onClick={event => setSearchQuery(event.target.value)}
-        />
-        <input
-          type="button"
-          disabled={!searchQuery}
-          onClick={() => {
-            handleSearchLocation();
-          }}
-          value="Search"
-        />
+        <p></p>
         <Map
-          google={window.google}
-          center={[default_latitude, default_longitude]}
-          zoom={12}
+          // google={window.google}
+          center={[latitude, longitude]}
+          zoom={zoom}
           onClick={handleMapClick}
         >
           <TileLayer
