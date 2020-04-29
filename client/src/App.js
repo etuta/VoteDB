@@ -9,8 +9,7 @@ import { MDBCol, MDBInput } from "mdbreact";
 import { List } from "immutable";
 
 
-import {
-  Container,
+import {  Container,
   Row,
   Col,
   ListGroup,
@@ -168,10 +167,12 @@ const App = () => {
 
   const filteredVoters = voters.filter (voter =>
      voter.party === partyFilter)
-     .filter(voter => voter.registrationStatus === registrationFilter)
-     .filter(voter => voter.ageRange === ageFilter)
+     .filter(voter => voter.registration_status === registrationFilter)
+     .filter(voter => voter.age_range === ageFilter)
      .filter(voter => voter.race === raceFilter)
-     .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
+     .filter(voter => voter.socioeconomic_status === socioeconomicFilter);
+
+     const filteredVotersList = filteredVoters.map( voter => (<p> {voter.name} </p>));
 
 
   return (
@@ -281,12 +282,11 @@ const App = () => {
                   >
                     <DropdownToggle caret>Age Range</DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setAgeFilter("18-25")}}> 18-25 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("25-35")}}> 25-35 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("18-34")}}> 18-34 </DropdownItem>
                     <DropdownItem onClick={()=> {setAgeFilter("35-50")}}> 35-50 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("50-70")}}> 50-70 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("70-90")}}> 70-90 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("90-110")}}> 90-110 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("51-70")}}> 51-70 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("71-90")}}> 71-90 </DropdownItem>
+                    <DropdownItem onClick={()=> {setAgeFilter("91-110")}}> 91-110 </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -298,8 +298,8 @@ const App = () => {
                     <DropdownMenu>
                     <DropdownItem onClick={()=> {setRaceFilter("American Indian or Alaska Native")}}> American Indian or Alaska Native </DropdownItem>
                     <DropdownItem onClick={()=> {setRaceFilter("Asian")}}> Asian </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Black or African American")}}> Black or African American </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Hispanic or Latino")}}> Hispanic or Latino </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Black")}}> Black or African American </DropdownItem>
+                    <DropdownItem onClick={()=> {setRaceFilter("Latino")}}> Hispanic or Latino </DropdownItem>
                     <DropdownItem onClick={()=> {setRaceFilter("Native Hawaiian or Other Pacific Islander")}}> Native Hawaiian or Other Pacific Islander </DropdownItem>
                     <DropdownItem onClick={()=> {setRaceFilter("White")}}> White </DropdownItem>
                     </DropdownMenu>
@@ -314,9 +314,9 @@ const App = () => {
                       Socioeconomic status{" "}
                     </DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("Low")}}> Low </DropdownItem>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("Medium")}}> Medium </DropdownItem>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("High")}}> High </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("lower")}}> Lower </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("mid")}}> Middle </DropdownItem>
+                    <DropdownItem onClick={()=> {setSocioeconomicFilter("upper")}}> Upper </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
                 </ListGroup>
