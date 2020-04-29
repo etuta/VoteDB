@@ -8,8 +8,8 @@ import Location from "./Location";
 import { MDBCol, MDBInput } from "mdbreact";
 import { List } from "immutable";
 
-
-import {  Container,
+import {
+  Container,
   Row,
   Col,
   ListGroup,
@@ -38,27 +38,40 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchPerson, setSearchPerson] = useState("");
   const [currentDropdown, setCurrentDropdown] = useState("");
+  const [people, setPeople] = useState(data);
   const [voters, setVoters] = useState(List());
 
+  const [partyFilter, setPartyFilter] = useState(null);
+  const [registrationFilter, setRegistrationFilter] = useState(null);
+  const [ageFilter, setAgeFilter] = useState(null);
+  const [raceFilter, setRaceFilter] = useState(null);
+  const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
 
-  const fetchVoters = () => {
-    fetch(`/api/voters`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status_text);
-        }
-        console.log(response);
-        return response.json();
-      })
-      .then(data => {
-        setVoters(data);
-      })
-      .catch(err => console.log(err)); // eslint-disable-line no-console
-  };
-
-  useEffect(() => {
-    fetchVoters();
+    useEffect(() => {
+    const fetchData = () => {
+      fetch("/api/voters/")
+        .then(response => {
+          // console.log('Here ajghg jhajhvj jhajvgav hjhbjh');
+          if (!response.ok) {
+            throw new Error(response.status_text);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setVoters(List(data));
+          setPeople(data);
+        })
+        .catch(err => console.log(err)); // eslint-disable-line no-console
+    };
+    fetchData();
   }, []);
+
+  const filteredVoters = voters
+    .filter(voter => voter.party === partyFilter)
+    .filter(voter => voter.registrationStatus === registrationFilter)
+    .filter(voter => voter.ageRange === ageFilter)
+    .filter(voter => voter.race === raceFilter)
+    .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
 
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
@@ -69,13 +82,6 @@ const App = () => {
 
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
-
-  const [partyFilter, setPartyFilter] = useState(null);
-  const [registrationFilter, setRegistrationFilter] = useState(null);
-  const [ageFilter, setAgeFilter] = useState(null);
-  const [raceFilter, setRaceFilter] = useState(null);
-  const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
-
 
   const locateUser = {
     //Locate user button
@@ -105,83 +111,65 @@ const App = () => {
     }
   };
 
+  const changeLocation = input => {
+    Geocode.fromAddress(input).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        setLatitude(lat);
+        setLongitude(lng);
+        setZoom(12);
+      },
+      error => {
+        console.error("Please enter valid address");
+      }
+    );
+  };
+
   const handleSearchLocation = () => {
     if (searchQuery) {
-      Geocode.fromAddress(searchQuery).then(
-        response => {
-          const { lat, lng } = response.results[0].geometry.location;
-          setLatitude(lat);
-          setLongitude(lng);
-          setZoom(12);
-        },
-        error => {
-          console.error("Please enter valid address");
-        }
-      );
-    } else {
-      alert("I'm sorry, I can't find the place you are looking for");
+      changeLocation(searchQuery);
     }
-    setSearchQuery(""); //Resets
+    setSearchQuery("");
   };
 
   const handleSearchPerson = () => {
     if (searchPerson) {
-      const person = voters.find(voter => voter.name === searchPerson);
+      const person = people.find(voter => voter.name === searchPerson);
       if (person) {
-        Geocode.fromAddress(person.address).then(
-          response => {
-            const { lat, lng } = response.results[0].geometry.location;
-            setLatitude(lat);
-            setLongitude(lng);
-            setZoom(12);
-          },
-          error => {
-            console.error("Please enter valid name");
-          }
-        );
-      } else {
-        alert("I'm sorry, I can't find the person you are looking for");
+        const address = person.address;
+        changeLocation(address);
       }
     }
-    setSearchPerson(""); //Resets
+    setSearchPerson("");
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      fetch('/api/voters/')
-        .then(response => {
-          console.log('Here ajghg jhajhvj jhajvgav hjhbjh');
-          if (!response.ok) {
-            throw new Error(response.status_text);
-          }
-          return response.json();
-        })
-        .then(data => {
-          setVoters(List(data));
-          console.log(voters);
-        })
-        .catch(err => console.log(err)); // eslint-disable-line no-console
-    };
-    fetchData();
-  }, []);
+  const headerStyle = {
+    color: "black",
+    backgroundColor: "skyblue",
+    padding: "10px",
+    fontsize: "40px",
+    fontFamily: "Arial"
+  };
 
-  const filteredVoters = voters.filter (voter =>
-     voter.party === partyFilter)
-     .filter(voter => voter.registration_status === registrationFilter)
-     .filter(voter => voter.age_range === ageFilter)
-     .filter(voter => voter.race === raceFilter)
-     .filter(voter => voter.socioeconomic_status === socioeconomicFilter);
-
-     const filteredVotersList = filteredVoters.map( voter => (<p> {voter.name} </p>));
-
+  const introStyle = {
+    color: "black",
+    backgroundColor: "skyblue",
+    padding: "10px",
+    fontsize: "40px",
+    fontFamily: "Arial"
+  };
 
   return (
     <Container>
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Voter App</h1>
+          <p></p>
+          <h1 style={headerStyle}>Voter App</h1>
         </header>
-        <p className="App-intro">Main page of the app</p>
+        <p style={introStyle}>
+          {" "}
+          "There's no such thing as a vote that doesn't matter. It all matters"{" "}
+        </p>
         <>
           <Row>
             <MDBCol md="8">
@@ -257,13 +245,31 @@ const App = () => {
                     isOpen={currentDropdown === "1"}
                     toggle={setCurrentDropdown.bind(this, "1")}
                   >
-                  <DropdownToggle caret>Party Affiliation</DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem onClick={()=> {setPartyFilter("Democrat")}}>Democrat</DropdownItem>
-                    <DropdownItem onClick={()=> {setPartyFilter("Republican")}}>Republican</DropdownItem>
-                    <DropdownItem onClick={()=> {setPartyFilter("Independent")}}>Independent</DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
+                    <DropdownToggle caret>Party Affiliation</DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem
+                        onClick={() => {
+                          setPartyFilter("Democrat");
+                        }}
+                      >
+                        Democrat
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setPartyFilter("Republican");
+                        }}
+                      >
+                        Republican
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setPartyFilter("Independent");
+                        }}
+                      >
+                        Independent
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
 
                   <ButtonDropdown
                     isOpen={currentDropdown === "2"}
@@ -271,8 +277,21 @@ const App = () => {
                   >
                     <DropdownToggle caret>Registration Status</DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setRegistrationFilter("Registered")}}> Registered </DropdownItem>
-                    <DropdownItem onClick={()=> {setRegistrationFilter("Not Registered")}}>Not Registered </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRegistrationFilter("Registered");
+                        }}
+                      >
+                        {" "}
+                        Registered{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRegistrationFilter("Not Registered");
+                        }}
+                      >
+                        Not Registered{" "}
+                      </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -282,11 +301,54 @@ const App = () => {
                   >
                     <DropdownToggle caret>Age Range</DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setAgeFilter("18-34")}}> 18-34 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("35-50")}}> 35-50 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("51-70")}}> 51-70 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("71-90")}}> 71-90 </DropdownItem>
-                    <DropdownItem onClick={()=> {setAgeFilter("91-110")}}> 91-110 </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("18-25");
+                        }}
+                      >
+                        {" "}
+                        18-25{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("25-35");
+                        }}
+                      >
+                        {" "}
+                        25-35{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("35-50");
+                        }}
+                      >
+                        {" "}
+                        35-50{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("50-70");
+                        }}
+                      >
+                        {" "}
+                        50-70{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("70-90");
+                        }}
+                      >
+                        {" "}
+                        70-90{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setAgeFilter("90-110");
+                        }}
+                      >
+                        {" "}
+                        90-110{" "}
+                      </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -296,12 +358,56 @@ const App = () => {
                   >
                     <DropdownToggle caret> Race </DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setRaceFilter("American Indian or Alaska Native")}}> American Indian or Alaska Native </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Asian")}}> Asian </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Black")}}> Black or African American </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Latino")}}> Hispanic or Latino </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("Native Hawaiian or Other Pacific Islander")}}> Native Hawaiian or Other Pacific Islander </DropdownItem>
-                    <DropdownItem onClick={()=> {setRaceFilter("White")}}> White </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter("American Indian or Alaska Native");
+                        }}
+                      >
+                        {" "}
+                        American Indian or Alaska Native{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter("Asian");
+                        }}
+                      >
+                        {" "}
+                        Asian{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter("Black or African American");
+                        }}
+                      >
+                        {" "}
+                        Black or African American{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter("Hispanic or Latino");
+                        }}
+                      >
+                        {" "}
+                        Hispanic or Latino{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter(
+                            "Native Hawaiian or Other Pacific Islander"
+                          );
+                        }}
+                      >
+                        {" "}
+                        Native Hawaiian or Other Pacific Islander{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setRaceFilter("White");
+                        }}
+                      >
+                        {" "}
+                        White{" "}
+                      </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
 
@@ -314,9 +420,30 @@ const App = () => {
                       Socioeconomic status{" "}
                     </DropdownToggle>
                     <DropdownMenu>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("lower")}}> Lower </DropdownItem>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("mid")}}> Middle </DropdownItem>
-                    <DropdownItem onClick={()=> {setSocioeconomicFilter("upper")}}> Upper </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setSocioeconomicFilter("Low");
+                        }}
+                      >
+                        {" "}
+                        Low{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setSocioeconomicFilter("Medium");
+                        }}
+                      >
+                        {" "}
+                        Medium{" "}
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => {
+                          setSocioeconomicFilter("High");
+                        }}
+                      >
+                        {" "}
+                        High{" "}
+                      </DropdownItem>
                     </DropdownMenu>
                   </ButtonDropdown>
                 </ListGroup>
