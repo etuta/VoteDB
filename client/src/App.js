@@ -7,6 +7,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Location from "./Location";
 import { MDBCol, MDBInput } from "mdbreact";
 import { List } from "immutable";
+import BackgroundImage from "./voter.png";
 
 import {
   Container,
@@ -21,15 +22,10 @@ import {
 } from "reactstrap";
 
 Geocode.setLanguage("en");
-Geocode.setApiKey("AIzaSyDvsbOnTX_TwqyfQwlzzHCpm_ErpQHDMCo");
+Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 //Private API Key
 
 const Button = styled.button``;
-
-const mapStyles = {
-  width: "100%",
-  height: "100%"
-};
 
 const App = () => {
   const [target, setTarget] = useState(null);
@@ -45,7 +41,6 @@ const App = () => {
     const fetchData = () => {
       fetch("/api/voters/")
         .then(response => {
-          // console.log('Here ajghg jhajhvj jhajvgav hjhbjh');
           if (!response.ok) {
             throw new Error(response.status_text);
           }
@@ -57,15 +52,7 @@ const App = () => {
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
-    fetchData();
   }, []);
-
-  const filteredVoters = voters
-    .filter(voter => voter.party === partyFilter)
-    .filter(voter => voter.registrationStatus === registrationFilter)
-    .filter(voter => voter.ageRange === ageFilter)
-    .filter(voter => voter.race === raceFilter)
-    .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
 
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
@@ -83,8 +70,14 @@ const App = () => {
   const [raceFilter, setRaceFilter] = useState(null);
   const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
 
+  const filteredVoters = voters
+    .filter(voter => voter.party === partyFilter)
+    .filter(voter => voter.registrationStatus === registrationFilter)
+    .filter(voter => voter.ageRange === ageFilter)
+    .filter(voter => voter.race === raceFilter)
+    .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
+
   const locateUser = {
-    //Locate user button
     position: "topright",
     strings: {
       title: "Go to location"
@@ -138,6 +131,8 @@ const App = () => {
       if (person) {
         const address = person.address;
         changeLocation(address);
+      } else {
+        alert("Please enter valid name");
       }
     }
     setSearchPerson("");
@@ -145,28 +140,18 @@ const App = () => {
 
   const headerStyle = {
     color: "black",
-    backgroundColor: "skyblue",
     padding: "10px",
     fontsize: "40px",
     fontFamily: "Arial"
   };
 
-  const introStyle = {
-    color: "black",
-    backgroundColor: "skyblue",
-    padding: "10px",
-    fontsize: "40px",
-    fontFamily: "Arial"
-  };
+  // <img src={BackgroundImage} alt=""/>
 
   return (
     <Container>
       <div className="App">
-        <header className="App-header">
-          <p></p>
-          <h1 style={headerStyle}>Voter App</h1>
-        </header>
-        <p style={introStyle}>
+        <h1 style={headerStyle}>Voter App</h1>
+        <p>
           {" "}
           "There's no such thing as a vote that doesn't matter. It all matters"{" "}
         </p>
@@ -176,10 +161,10 @@ const App = () => {
               <input
                 className="form-control"
                 type="text"
+                onClick={event => setSearchQuery(event.target.value)}
                 value={searchQuery.value}
                 placeholder="Look up location..."
                 aria-label="Search location"
-                onClick={event => setSearchQuery(event.target.value)}
               />
             </MDBCol>
             <button
@@ -209,10 +194,10 @@ const App = () => {
               <input
                 className="form-control"
                 type="text"
+                onClick={event => setSearchPerson(event.target.value)}
                 value={searchPerson.value}
                 placeholder="To look up a person, please enter first and last name..."
                 aria-label="Search person"
-                onClick={event => setSearchPerson(event.target.value)}
               />
             </MDBCol>
             <button
