@@ -39,18 +39,20 @@ const App = () => {
   const [searchPerson, setSearchPerson] = useState("");
   const [currentDropdown, setCurrentDropdown] = useState("");
   const [people, setPeople] = useState(data);
-  const [voters, setVoters] = useState(List());
+  const [voters, setVoters] = useState([]);
+  const [filteredVoters, setFilteredVoters] = useState([]);
 
   const [partyFilter, setPartyFilter] = useState(null);
   const [registrationFilter, setRegistrationFilter] = useState(null);
-  const [ageFilter, setAgeFilter] = useState(null);
+  const [ageRangeFilter, setAgeRangeFilter] = useState({});
   const [raceFilter, setRaceFilter] = useState(null);
   const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = () => {
       fetch("/api/voters/")
         .then(response => {
+          
           // console.log('Here ajghg jhajhvj jhajvgav hjhbjh');
           if (!response.ok) {
             throw new Error(response.status_text);
@@ -58,7 +60,7 @@ const App = () => {
           return response.json();
         })
         .then(data => {
-          setVoters(List(data));
+          setVoters(data);
           setPeople(data);
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
@@ -66,12 +68,26 @@ const App = () => {
     fetchData();
   }, []);
 
-  const filteredVoters = voters
-    .filter(voter => voter.party === partyFilter)
-    .filter(voter => voter.registrationStatus === registrationFilter)
-    .filter(voter => voter.ageRange === ageFilter)
-    .filter(voter => voter.race === raceFilter)
-    .filter(voter => voter.socioeconomicStatus === socioeconomicFilter);
+  useEffect(() => {
+    console.log('voters: ', voters)
+    const filtVoters = voters
+      .filter(voter => partyFilter ? voter.party === partyFilter : true)
+      .filter(voter => registrationFilter !== null ? voter.regstration_status === registrationFilter : true)
+      .filter(voter => {
+        if (!ageRangeFilter.max) return true;
+        const age = parseInt(voter.age_range);
+
+        return age >= ageRangeFilter.min && age <= ageRangeFilter.max;
+      })
+      
+       .filter(voter => raceFilter ? voter.race === raceFilter : true)
+       .filter(voter => socioeconomicFilter ? voter.socioeconomic_status === socioeconomicFilter : true);
+      console.log('filtVoters: ', filtVoters)
+      setFilteredVoters(filtVoters);
+  }, [partyFilter, registrationFilter, ageRangeFilter, raceFilter, socioeconomicFilter]);
+
+
+  console.log('filteredVoters: ', filteredVoters)
 
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
@@ -159,6 +175,7 @@ const App = () => {
     fontFamily: "Arial"
   };
 
+  
   return (
     <Container>
       <div className="App">
@@ -279,7 +296,7 @@ const App = () => {
                     <DropdownMenu>
                       <DropdownItem
                         onClick={() => {
-                          setRegistrationFilter("Registered");
+                          setRegistrationFilter(1);
                         }}
                       >
                         {" "}
@@ -287,7 +304,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setRegistrationFilter("Not Registered");
+                          setRegistrationFilter(0);
                         }}
                       >
                         Not Registered{" "}
@@ -303,7 +320,7 @@ const App = () => {
                     <DropdownMenu>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("18-25");
+                          setAgeRangeFilter({min: 18, max: 24});
                         }}
                       >
                         {" "}
@@ -311,7 +328,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("25-35");
+                          setAgeRangeFilter({min: 25, max: 34});
                         }}
                       >
                         {" "}
@@ -319,7 +336,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("35-50");
+                          setAgeRangeFilter({min: 35, max: 49});
                         }}
                       >
                         {" "}
@@ -327,7 +344,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("50-70");
+                          setAgeRangeFilter({min: 50, max: 69});
                         }}
                       >
                         {" "}
@@ -335,7 +352,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("70-90");
+                          setAgeRangeFilter({min: 70, max: 89});
                         }}
                       >
                         {" "}
@@ -343,7 +360,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setAgeFilter("90-110");
+                          setAgeRangeFilter({min: 90, max: 110});
                         }}
                       >
                         {" "}
@@ -422,7 +439,7 @@ const App = () => {
                     <DropdownMenu>
                       <DropdownItem
                         onClick={() => {
-                          setSocioeconomicFilter("Low");
+                          setSocioeconomicFilter("lower");
                         }}
                       >
                         {" "}
@@ -430,7 +447,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setSocioeconomicFilter("Medium");
+                          setSocioeconomicFilter("mid");
                         }}
                       >
                         {" "}
@@ -438,7 +455,7 @@ const App = () => {
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => {
-                          setSocioeconomicFilter("High");
+                          setSocioeconomicFilter("upper");
                         }}
                       >
                         {" "}
@@ -452,6 +469,11 @@ const App = () => {
           )}
         </>
         <p></p>
+        <Row>
+          <MDBCol md="8">
+            <div>{filteredVoters.map(({id, name}) => <p key={id}>{name}</p>)}</div>
+          </MDBCol>
+       </Row>
         <Map
           // google={window.google}
           center={[latitude, longitude]}

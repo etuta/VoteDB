@@ -4,7 +4,7 @@
     "address": "14 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "1",
     "party": "Democrat",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "18-34",
     "race": "White",
     "socioeconomic_status": "upper"
@@ -14,7 +14,7 @@
     "address": "16 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "0",
     "party": "Democrat",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -24,7 +24,7 @@
     "address": "14 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "3",
     "party": "Republican",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "18-34",
     "race": "White",
     "socioeconomic_status": "lower"
@@ -34,7 +34,7 @@
     "address": "17 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "1",
     "party": "Republican",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "upper"
@@ -44,7 +44,7 @@
     "address": "17 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "2",
     "party": "Republican",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -54,7 +54,7 @@
     "address": "24 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "2",
     "party": "Republican",
-    "regstration_status": "Not Registered",
+    "registration_status": "Not Registered",
     "age_range": "51-70",
     "race": "White",
     "socioeconomic_status": "lower"
@@ -64,7 +64,7 @@
     "address": "7 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "5",
     "party": "Independent",
-    "regstration_status": "Not Registered",
+    "registration_status": "Not Registered",
     "age_range": "51-70",
     "race": "Black",
     "socioeconomic_status": "upper"
@@ -74,7 +74,7 @@
     "address": "3 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "6",
     "party": "55",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "51-70",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -84,7 +84,7 @@
     "address": "34 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "0",
     "party": "Independent",
-    "regstration_status": "Not Registered",
+    "registration_status": "Not Registered",
     "age_range": "71-90",
     "race": "Asian",
     "socioeconomic_status": "lower"
@@ -94,7 +94,7 @@
     "address": "18 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "4",
     "party": "Republican",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "18-34",
     "race": "Latino",
     "socioeconomic_status": "upper"
@@ -104,7 +104,7 @@
     "address": "20 Old Chapel Rd., Middlebury, VT 05753",
     "times_contacted": "3",
     "party": "Democrat",
-    "regstration_status": "Registered",
+    "registration_status": "Registered",
     "age_range": "18-34",
     "race": "Black",
     "socioeconomic_status": "mid"
