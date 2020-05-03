@@ -6,18 +6,125 @@ body {
 
 .leaflet-container {
   position: absolute;
-  left: 50px;
+  left: 350px;
   width: 50%;
-  height: 65vh;
+  height: 60vh;
+  border-radius: 20px;
+  border-width: 10px;
 }
 
-.App img {
+.wallpaper {
+  background-image: url(./wallpaper.png);
   position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
   width: 100%;
   height: 100%;
-  opacity: 0.9;
+  right: 0px;
+  left: 0px;
+  background-repeat: no-repeat;
+}
+
+.searchField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.modalContainer {
+  position: absolute;
+  left: 350px;
+  top: 100px;
+  z-index: 1;
+  width: 50%;
+  height: 80%;
+  overflow: auto;
+  background-color: white;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.modalContent {
+  background-color: steelblue;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.modalClose {
+  color: black;
+  font-size: 16px;
+}
+
+.emailButton {
+  border-radius: 50px;
+  background-color: black;
+  color: white;
+}
+
+.emailBar {
+  position: relative;
+  padding-top: 20px;
+  top: 500px;
+  left: 700px;
+}
+
+.cell {
+  color: steelblue;
+  text-align: center;
+  border: 1px solid steelblue;
+  border-radius: 6px;
+  background-color: black;
+  font-family: Georgia;
+  font-size: 16px;
+}
+
+.cell-highlight {
+  color: darkblue;
+  text-align: center;
+  border: 1px solid steelblue;
+  border-radius: 6px;
+  background-color: gainsboro;
+  font-family: Georgia;
+  font-size: 16px;
+}
+
+.headings {
+  color: black;
+  text-align: center;
+  border: 1px solid steelblue;
+  border-radius: 8px;
+  background-color: steelblue;
+  font-family: Georgia;
+  font-size: 17px;
+}
+
+.table {
+  display: block;
+  height: 200px;
+  width: 50%;
+  overflow: scroll;
+}
+
+.labels {
+  color: black;
+  font-family: Georgia;
+}
+
+.submitButton {
+  color: steelblue;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: black;
+}
+
+.emailField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

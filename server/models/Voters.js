@@ -29,7 +29,7 @@ class Voters extends Model {
         address: { type: "text" },
         times_contacted: { type: "integer" },
         party: { type: "string" },
-        regstration_status: { type: "boolean" },
+        registration_status: { type: "boolean" },
         age_range: { type: "string" },
         race: { type: "string" },
         socioeconomic_status: { type: "string" }
