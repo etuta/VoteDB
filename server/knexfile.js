@@ -1,17 +1,27 @@
 // Update with your config settings.
 
 module.exports = {
-  development: {
-    client: "sqlite3",
+  test: {
+    client: 'sqlite3',
     connection: {
-      filename: "./voters.db"
+      filename: './voters.db',
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    seeds: {
+      directory: './seeds/load-voters',
+    },
+  },
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './voters.db',
+    },
+    useNullAsDefault: true,
   },
 
   production: {
-    client: "pg",
+    client: 'pg',
     connection: process.env.DATABASE_URL,
-    ssl: true
-  }
+    ssl: true,
+  },
 };
