@@ -54,10 +54,11 @@ const App = () => {
           return response.json();
         })
         .then(data => {
-          setVoters(data);
+          setVoters(List (data));
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
+    fetchData();
   }, []);
 
   useEffect(() => {
