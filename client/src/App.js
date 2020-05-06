@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
@@ -54,7 +54,7 @@ const App = () => {
           return response.json();
         })
         .then(data => {
-          setVoters(List (data));
+          setVoters(List(data));
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
@@ -393,6 +393,11 @@ const App = () => {
                       </Col>
                     </Row>
                   )}
+                  <div>
+                    {filteredVoters.map(({ id, name }) => (
+                      <p key={id}>{name}</p>
+                    ))}
+                  </div>
                 </Modal>
               </Row>
             </div>
@@ -401,11 +406,6 @@ const App = () => {
           <p></p>
           <Row>
             <MDBCol md="8">
-              <div>
-                {filteredVoters.map(({ id, name }) => (
-                  <p key={id}>{name}</p>
-                ))}
-              </div>
             </MDBCol>
           </Row>
           <Row>
