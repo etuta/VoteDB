@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { MDBCol, MDBInput } from "mdbreact";
+import { MDBCol } from "mdbreact";
 import { Row } from "reactstrap";
-import data from "../seed.json";
 
 function SearchBar({ select }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchPerson, setSearchPerson] = useState("");
-  const [people, setPeople] = useState(data);
+  const [people, setPeople] = useState([]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -22,6 +21,7 @@ function SearchBar({ select }) {
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
+    fetchData();
   }, []);
 
   const handleSearchLocation = () => {

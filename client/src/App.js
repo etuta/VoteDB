@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Component } from "react";
-import data from "./seed.json";
+// import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
 import styled from "styled-components";
@@ -54,7 +54,7 @@ const App = () => {
           return response.json();
         })
         .then(data => {
-          setVoters(List (data));
+          setVoters(List(data));
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
@@ -93,7 +93,7 @@ const App = () => {
     socioeconomicFilter
   ]);
 
-  console.log("filteredVoters: ", filteredVoters);
+  // console.log("filteredVoters: ", filteredVoters);
 
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
@@ -130,7 +130,7 @@ const App = () => {
         const { lat, lng } = response.results[0].geometry.location;
         setLatitude(lat);
         setLongitude(lng);
-        setZoom(12);
+        setZoom(20);
       },
       error => {
         alert(

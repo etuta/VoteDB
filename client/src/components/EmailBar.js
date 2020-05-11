@@ -1,26 +1,26 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
-import { Row, Form, FormGroup, Input, Label, Button } from "reactstrap";
-import data from "../seed.json";
+import { Row, Form, FormGroup, Input, Label } from "reactstrap";
 import Modal from "./Modal.js";
 import { emailStyle } from "./UIDesign.js";
-import Center from "react-center";
+import emailjs from "emailjs-com";
 
 function EmailBar() {
   const [modal, setModal] = useState(false);
-  const [selectedVoters, setSelectedVoters] = useState(data);
-  //Should be a list of filtered voters
-  //Currently showing all voters
+  const [selectedVoters, setSelectedVoters] = useState([]);
+  //Should be a list of filtered voters. Currently showing all voters
+
   const [highlight, setHighlight] = useState(false);
-  const [chosenRecipients, setChosenRecipients] = useState([]);
-  //Only if we want to send a mass email
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
 
   const [namesArray, setNamesArray] = useState([]);
-  //For mass email feature
   const [addressArray, setAddressArray] = useState([]);
-  //For mass email feature
+
+  const [doubleClick, setDoubleClick] = useState(false);
 
   useEffect(() => {
     const fetchData = () => {
@@ -36,7 +36,16 @@ function EmailBar() {
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
+    fetchData();
   }, []);
+
+  const handleModalOpen = () => {
+    setModal(true);
+  };
+
+  const handleModalClose = () => {
+    setModal(false);
+  };
 
   const getContactInfo = array => {
     const output = [];
@@ -47,64 +56,67 @@ function EmailBar() {
     return output;
   };
 
-  const handleModalOpen = () => {
-    setModal(true);
-  };
-
-  const handleModalClose = () => {
-    setModal(false);
-  };
-
-  const handleSend = () => {
-    alert(["To " + name + " at " + address + " : " + message]);
-  };
-
   const tableRows = getContactInfo(selectedVoters);
-  //Array of arrays containing name and address
 
   const fetchUserClick = click => {
-    setName(click.target.getAttribute("voter-title").split(",")[0]);
-    setAddress(click.target.getAttribute("voter-title").split(",")[1]);
-
-    const updatedNamesArray = namesArray;
-    updatedNamesArray.push(name);
-    setNamesArray(updatedNamesArray);
-    //For mass email feature
-
-    const updatedAddressArray = addressArray;
-    updatedAddressArray.push(address);
-    setNamesArray(updatedAddressArray);
-    //For mass email feature
-
-    const updatedChosenRecipients = chosenRecipients;
-    updatedChosenRecipients.push(name);
-    setChosenRecipients(updatedChosenRecipients);
-
-    if (chosenRecipients.length === 5) {
-      //If we implement a mass email feature, this ensures that, at most,
-      //5 voters can be chosen
-      setHighlight(false);
-      alert("You can only choose 5 voters at a time");
-      setName("");
-      setAddress("");
-      setNamesArray([]);
-      //For mass email feature
-      setAddressArray([]);
-      //For mass email feature
-    }
-
     if (!highlight) {
       setHighlight(true);
-      setChosenRecipients([]);
-      //Resets
     }
+
+    let voterName = click.target.getAttribute("voter-title").split(",")[0];
+    let voterAddress = click.target.getAttribute("voter-title").split(",")[1];
+
+    if (voterName === name) {
+      setDoubleClick(true);
+    } else {
+      setDoubleClick(false);
+    }
+
+    setName(voterName);
+    setAddress(voterAddress);
+
+    if (namesArray.includes(voterName)) {
+      const updatedNamesArray = namesArray;
+      updatedNamesArray.splice(updatedNamesArray.indexOf(voterName), 1);
+      setNamesArray(updatedNamesArray);
+
+      const updatedAddressArray = addressArray;
+      updatedAddressArray.splice(updatedAddressArray.indexOf(voterAddress), 1);
+      setAddressArray(updatedAddressArray);
+    } else {
+      const updatedNamesArray = namesArray;
+      updatedNamesArray.push(voterName);
+      setNamesArray(updatedNamesArray);
+
+      const updatedAddressArray = addressArray;
+      updatedAddressArray.push(voterAddress);
+      setAddressArray(updatedAddressArray);
+    }
+
+    if (namesArray.length > 5) {
+      alert("You can only choose 5 voters");
+      setHighlight(false);
+      handleReset();
+    }
+  };
+
+  const handleReset = () => {
+    setName("");
+    setAddress("");
+    setMessage("");
+    setNamesArray([]);
+    setAddressArray([]);
   };
 
   const tableData = () => {
     if (!highlight) {
-      return tableRows.map(voter => {
+      return tableRows.map((voter, index) => {
         return (
-          <tr voter-item={voter} onClick={click => fetchUserClick(click)}>
+          <tr
+            key={index}
+            voter-item={voter}
+            onClick={click => fetchUserClick(click)}
+          >
             <td className="cell" voter-title={voter}>
               {voter[0]}
             </td>
@@ -115,24 +127,14 @@ function EmailBar() {
         );
       });
     } else {
-      return tableRows.map(voter => {
-        if (2 <= chosenRecipients.length <= 5) {
-          if (chosenRecipients.find(recipient => recipient === voter[0])) {
-            return (
-              <tr voter-item={voter} onClick={click => fetchUserClick(click)}>
-                <td className="cell-highlight" voter-title={voter}>
-                  {voter[0]}
-                </td>
-                <td className="cell-highlight" voter-title={voter}>
-                  {voter[1]}
-                </td>
-              </tr>
-            );
-          }
-        }
-        if (name === voter[0]) {
+      return tableRows.map((voter, index) => {
+        if (namesArray.includes(voter[0])) {
           return (
-            <tr voter-item={voter} onClick={click => fetchUserClick(click)}>
+            <tr
+              key={index}
+              voter-item={voter}
+              onClick={click => fetchUserClick(click)}
+            >
               <td className="cell-highlight" voter-title={voter}>
                 {voter[0]}
               </td>
@@ -143,7 +145,11 @@ function EmailBar() {
           );
         } else {
           return (
-            <tr voter-item={voter} onClick={click => fetchUserClick(click)}>
+            <tr
+              key={index}
+              voter-item={voter}
+              onClick={click => fetchUserClick(click)}
+            >
               <td className="cell" voter-title={voter}>
                 {voter[0]}
               </td>
@@ -166,6 +172,43 @@ function EmailBar() {
     );
   };
 
+  const handleNameDisplay = () => {
+    const displayNames = [...namesArray];
+    let outputNames = [...new Set(displayNames)].join(", ");
+    return outputNames;
+  };
+
+  const handleAddressDisplay = () => {
+    const displayAddresses = [...addressArray];
+    let outputAddresses = [...new Set(displayAddresses)].join(", ");
+    return outputAddresses;
+  };
+
+  const handleSend = e => {
+    e.preventDefault();
+
+    let email = "roshan@twinkids.com";
+    //Placeholder for now
+
+    var params = {
+      email: email,
+      name: name,
+      message: message
+    };
+
+    emailjs.send(
+      "contact_service",
+      "contact_form",
+      params,
+      "user_C9EJhitygT2N6VxxaQJTE"
+    );
+
+    alert("Successfully sent");
+
+    handleModalClose();
+    handleReset();
+  };
+
   return (
     <div>
       <Row>
@@ -181,55 +224,50 @@ function EmailBar() {
           <h3 style={emailStyle}>Reach out</h3>
           <h5 style={emailStyle}>Scroll to select a voter</h5>
           <table className="table">
-            <Center>
-              <tbody>
-                {tableHeadings()}
-                {tableData()}
-              </tbody>
-            </Center>
+            <tbody>
+              {tableHeadings()}
+              {tableData()}
+            </tbody>
           </table>
           <div className="emailField">
-            <Form>
+            <Form onSubmit={e => handleSend(e)} style={{ width: "400px" }}>
               <FormGroup>
                 <Label className="labels" for="name">
-                  Name
+                  Name:
                 </Label>
                 <Input
                   type="text"
                   name="name"
-                  value={name}
-                  onClick={event => setName(event.target.value)}
+                  value={handleNameDisplay()}
+                  onChange={event => setName(event.target.value)}
                 />
               </FormGroup>
               <FormGroup>
                 <Label className="labels" for="email">
-                  Email
+                  Email:
                 </Label>
                 <Input
                   type="text"
-                  //Should be type="email"
                   name="email"
-                  value={address}
-                  onClick={event => setAddress(event.target.value)}
+                  value={handleAddressDisplay()}
+                  onChange={event => setAddress(event.target.value)}
                 />
               </FormGroup>
               <FormGroup>
                 <Label className="labels" for="message">
-                  Message
+                  Message:
                 </Label>
                 <Input
                   type="textarea"
                   name="message"
                   value={message.value}
-                  onClick={event => setMessage(event.target.value)}
+                  onChange={event => setMessage(event.target.value)}
                 />
               </FormGroup>
               <button
                 className="submitButton"
+                type="submit"
                 disabled={!message}
-                onClick={() => {
-                  handleSend();
-                }}
               >
                 Send
               </button>{" "}

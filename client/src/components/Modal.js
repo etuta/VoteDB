@@ -8,7 +8,7 @@ const Modal = ({ handleClose, show, children }) => {
       <div className="modalContainer">
         <div className="modalContent">
           {children}
-          <a className="modalClose" onClick={handleClose}>
+          <a href="#Modal" className="modalClose" onClick={handleClose}>
             <p></p>
             Leave
           </a>

@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overflow: hidden;
 }
 
 .leaflet-container {
@@ -54,6 +55,7 @@ body {
   background-color: steelblue;
   padding-top: 20px;
   width: 100%;
+  overflow: hidden;
 }
 
 .modalClose {
@@ -107,8 +109,10 @@ body {
 .table {
   display: block;
   height: 200px;
-  width: 50%;
+  width: 100%;
   overflow: scroll;
+  margin-left: 18%;
+  margin-right: 0%;
 }
 
 .labels {

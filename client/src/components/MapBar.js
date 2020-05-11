@@ -1,5 +1,6 @@
 import React from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { Map, TileLayer } from "react-leaflet";
+// Can also import Marker, Popup
 import Location from "./Location.js";
 
 function MapBar({ latitude, longitude, zoom, select }) {
