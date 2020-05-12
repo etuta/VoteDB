@@ -27,7 +27,6 @@ app.use(bodyParser.json());
 app.get('/api/voters', (request, response, next) => {
   Voters.query().then((voters) => {
     response.send(voters);
-    console.log(voters);
   }, next); // <- Notice the "next" function as the rejection handler
 });
 
