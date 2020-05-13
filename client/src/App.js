@@ -393,11 +393,6 @@ const App = () => {
                       </Col>
                     </Row>
                   )}
-                  <div>
-                    {filteredVoters.map(({ id, name }) => (
-                      <p key={id}>{name}</p>
-                    ))}
-                  </div>
                 </Modal>
               </Row>
             </div>
@@ -406,6 +401,11 @@ const App = () => {
           <p></p>
           <Row>
             <MDBCol md="8"></MDBCol>
+            <div>
+              {filteredVoters.map(({ id, name }) => (
+                <p key={id}>{name}</p>
+              ))}
+            </div>
           </Row>
           <Row>
             <MapBar
