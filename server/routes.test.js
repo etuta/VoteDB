@@ -1,4 +1,18 @@
-const { app } = require('./routes');
+/* eslint-disable arrow-body-style */
+const request = require('supertest');
+const { app, knex } = require('./routes');
+
+const voter = {
+  id: '1',
+  name: 'Jim Halpert',
+  address: '14 Old Chapel Rd., Middlebury, VT 05753',
+  email: 'eosorio@middlebury.edu',
+  party: 'Democrat',
+  regstration_status: 'Registered',
+  age_range: '18-34',
+  race: 'White',
+  socioeconomic_status: 'upper',
+};
 
 test('Server "smoke" test', () => {
   expect(app).toBeDefined();
@@ -6,4 +20,28 @@ test('Server "smoke" test', () => {
 
 test('dotenv configured', () => {
   expect(process.env.MY_SECRET).toBeDefined();
+});
+
+describe('Voters API', () => {
+  beforeEach(() => {
+    return knex.migrate
+      .rollback()
+      .then(() => knex.migrate.latest())
+      .then(() => knex.seed.run());
+  });
+
+  afterEach(() => {
+    return knex.migrate.rollback();
+  });
+
+  // SuperTest has several helpful methods for conveniently testing responses
+  // that we can use to make the tests more concise
+
+  test('GET /api/voters should return all voters', () => {
+    return request(app)
+      .get('/api/voters')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .expect([{ id: 1, ...voter }]);
+  });
 });

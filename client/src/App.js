@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+// eslint-disable-next-line
 import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
-import styled from "styled-components";
-import { MDBCol, MDBInput } from "mdbreact";
+//import styled from "styled-components";
+import { MDBCol } from "mdbreact";
 import { List } from "immutable";
 import { headerStyle, introStyle, filterStyle } from "./components/UIDesign.js";
 import SearchBar from "./components/SearchBar.js";
@@ -16,7 +17,6 @@ import {
   Row,
   Col,
   ListGroup,
-  ListGroupItem,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -27,11 +27,12 @@ Geocode.setLanguage("en");
 Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 //Private API Key
 
-const Button = styled.button``;
+//const Button = styled.button``;
 
 const App = () => {
+  // eslint-disable-next-line
   const [target, setTarget] = useState(null);
-  const [dropdownOpen, setOpen] = useState(false);
+  //const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
   const [currentDropdown, setCurrentDropdown] = useState("");
   const [voters, setVoters] = useState([]);
@@ -85,13 +86,7 @@ const App = () => {
       );
     console.log("filtVoters: ", filtVoters);
     setFilteredVoters(filtVoters);
-  }, [
-    partyFilter,
-    registrationFilter,
-    ageRangeFilter,
-    raceFilter,
-    socioeconomicFilter
-  ]);
+  }, [partyFilter, registrationFilter, ageRangeFilter, raceFilter, socioeconomicFilter, voters]);
 
   console.log("filteredVoters: ", filteredVoters);
 
@@ -99,19 +94,20 @@ const App = () => {
   const [latitude, setLatitude] = useState(54.526);
   const [longitude, setLongitude] = useState(-105.2551);
   const [zoom, setZoom] = useState(3);
-
+  // eslint-disable-next-line
   const toggle = dropdown => setCurrentDropdown(dropdown);
 
+  // eslint-disable-next-line
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState("view");
 
   //  const target = useRef(null);
-  const ref = useRef(null);
+  //const ref = useRef(null);
 
-  const handleClick = event => {
-    setShow(!show);
-    setTarget(event.target);
-  };
+//  const handleClick = event => {
+  //  setShow(!show);
+    //setTarget(event.target);
+//  };
 
   const handleMapClick = click => {
     //User can choose any five points on the map

@@ -9,7 +9,7 @@ const LocateControl = props => {
 
     const location = new Locate(options);
     location.addTo(map);
-  }, []);
+  }, [props]);
 
   return null;
 };

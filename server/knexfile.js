@@ -8,7 +8,7 @@ module.exports = {
     },
     useNullAsDefault: true,
     seeds: {
-      directory: './seeds/load-voters',
+      directory: './seeds',
     },
   },
   development: {
