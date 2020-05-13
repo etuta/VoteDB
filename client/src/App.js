@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line
-import data from "./seed.json";
+//import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
 //import styled from "styled-components";
@@ -71,9 +71,9 @@ const App = () => {
     const filtered = voters
       .filter(voter => (partyFilter ? voter.party === partyFilter : true))
       .filter(voter =>
-        registrationFilter !== null
+        (registrationFilter !== null
           ? voter.regstration_status === registrationFilter
-          : true
+          : true)
       )
       .filter(voter => {
         if (!ageRangeFilter.max) return true;
@@ -110,7 +110,7 @@ const App = () => {
 
   //  const target = useRef(null);
   // TODO: not used
-  const ref = useRef(null);
+//  const ref = useRef(null);
 
   // TODO: not used
   // const handleClick = event => {

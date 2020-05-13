@@ -5,7 +5,7 @@
     "email": "eosorio@middlebury.edu",
     "party": "Democrat",
     "regstration_status": "Registered",
-    "age_range": "18-34",
+    "age_range": "30",
     "race": "White",
     "socioeconomic_status": "upper"
   },
@@ -15,7 +15,7 @@
     "email": "osorioelva@gmail.com",
     "party": "Democrat",
     "regstration_status": "Registered",
-    "age_range": "35-50",
+    "age_range": "40",
     "race": "White",
     "socioeconomic_status": "mid"
   },
@@ -25,7 +25,7 @@
     "email": "elsammyosorio@hotmail.com",
     "party": "Republican",
     "regstration_status": "Registered",
-    "age_range": "18-34",
+    "age_range": "34",
     "race": "White",
     "socioeconomic_status": "lower"
   },
@@ -35,7 +35,7 @@
     "email": "rbabu@middlebury.edu",
     "party": "Republican",
     "regstration_status": "Registered",
-    "age_range": "35-50",
+    "age_range": "78",
     "race": "White",
     "socioeconomic_status": "upper"
   },
@@ -45,18 +45,18 @@
     "email": "williamk@middlebury.edu",
     "party": "Republican",
     "regstration_status": "Registered",
-    "age_range": "35-50",
+    "age_range": "23",
     "race": "White",
     "socioeconomic_status": "mid"
   },
   {
     "name": "Andy Bernard",
     "address": "24 Old Chapel Rd., Middlebury, VT 05753",
-    "email": "etuta@middlebury.com",
+    "email": "etuta@middlebury.edu",
     "party": "Republican",
     "regstration_status": "Not Registered",
-    "age_range": "51-70",
-    "race": "White",
+    "age_range": "64",
+    "race": "Native",
     "socioeconomic_status": "lower"
   },
   {
@@ -65,7 +65,7 @@
     "email": "mkawano@middlebury.edu",
     "party": "Independent",
     "regstration_status": "Not Registered",
-    "age_range": "51-70",
+    "age_range": "65",
     "race": "Black",
     "socioeconomic_status": "upper"
   },
@@ -75,7 +75,7 @@
     "email": "jvillalobos@middlebury.edu",
     "party": "55",
     "regstration_status": "Registered",
-    "age_range": "51-70",
+    "age_range": "48",
     "race": "White",
     "socioeconomic_status": "mid"
   },
@@ -84,8 +84,8 @@
     "address": "34 Old Chapel Rd., Middlebury, VT 05753",
     "email": "sgrandas@middlebury.edu",
     "party": "Independent",
-    "regstration_status": "Not Registered",
-    "age_range": "71-90",
+    "registration_status": "Not Registered",
+    "age_range": "77",
     "race": "Asian",
     "socioeconomic_status": "lower"
   },
@@ -95,7 +95,7 @@
     "email": "wghirmai@middlebury.edu",
     "party": "Republican",
     "regstration_status": "Registered",
-    "age_range": "18-34",
+    "age_range": "30",
     "race": "Latino",
     "socioeconomic_status": "upper"
   },
@@ -105,7 +105,7 @@
     "email": "elvajgomez@gmail.com",
     "party": "Democrat",
     "regstration_status": "Registered",
-    "age_range": "18-34",
+    "age_range": "20",
     "race": "Black",
     "socioeconomic_status": "mid"
   }

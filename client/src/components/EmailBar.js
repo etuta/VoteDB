@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Row, Form, FormGroup, Input, Label, Button } from "reactstrap";
-import data from "../seed.json";
+//import data from "../seed.json";
 import Modal from "./Modal.js";
 import { emailStyle } from "./UIDesign.js";
 import Center from "react-center";
 
 function EmailBar() {
   const [modal, setModal] = useState(false);
-  const [selectedVoters, setSelectedVoters] = useState(data);
+  const [selectedVoters, setSelectedVoters] = useState([]);
   //Should be a list of filtered voters
   //Currently showing all voters
   const [highlight, setHighlight] = useState(false);
