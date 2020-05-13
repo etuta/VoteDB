@@ -36,17 +36,18 @@ const App = () => {
   const [target, setTarget] = useState(null);
   const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
-  // const [currentDropdown, setCurrentDropdown] = useState("");
-  const [voters, setVoters] = useState([]);
-  const [filteredVoters, setFilteredVoters] = useState([]);
+  const [voters, setVoters] = useState(List());
+  const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
   const [mode, setMode] = useState("view");
 
-  // const [partyFilter, setPartyFilter] = useState(null);
-  // const [registrationFilter, setRegistrationFilter] = useState(null);
-  // const [ageRangeFilter, setAgeRangeFilter] = useState({});
-  // const [raceFilter, setRaceFilter] = useState(null);
-  // const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
+  console.log('filteredVoters', filteredVoters.isEmpty());
+
+  const [registrationFilter, setRegistrationFilter] = useState(null);
+  const [ageRangeFilter, setAgeRangeFilter] = useState({});
+  const [raceFilter, setRaceFilter] = useState("");
+  const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
+  const [partyFilter, setPartyFilter] = useState(null);
 
   useEffect(() => {
     (()=> {
@@ -63,41 +64,43 @@ const App = () => {
         .catch(err => console.log(err)); // eslint-disable-line no-console
     })()
   }, []);
-  
 
-  // useEffect(() => {
-  //   console.log("voters: ", voters);
-  //   const filtVoters = voters
-  //     .filter(voter => (partyFilter ? voter.party === partyFilter : true))
-  //     .filter(voter =>
-  //       registrationFilter !== null
-  //         ? voter.regstration_status === registrationFilter
-  //         : true
-  //     )
-  //     .filter(voter => {
-  //       if (!ageRangeFilter.max) return true;
-  //       const age = parseInt(voter.age_range);
 
-  //       return age >= ageRangeFilter.min && age <= ageRangeFilter.max;
-  //     })
+  useEffect(() => {
+    const filtered = voters
+      .filter(voter => (partyFilter ? voter.party === partyFilter : true))
+      .filter(voter =>
+        registrationFilter !== null
+          ? voter.regstration_status === registrationFilter
+          : true
+      )
+      .filter(voter => {
+        if (!ageRangeFilter.max) return true;
+        const age = parseInt(voter.age_range);
 
-  //     .filter(voter => (raceFilter ? voter.race === raceFilter : true))
-  //     .filter(voter =>
-  //       socioeconomicFilter
-  //         ? voter.socioeconomic_status === socioeconomicFilter
-  //         : true
-  //     );
-  //   console.log("filtVoters: ", filtVoters);
-  //   setFilteredVoters(filtVoters);
-  // }, [
-  //   partyFilter,
-  //   registrationFilter,
-  //   ageRangeFilter,
-  //   raceFilter,
-  //   socioeconomicFilter
-  // ]);
+        return age >= ageRangeFilter.min && age <= ageRangeFilter.max;
+      })
 
-  //console.log("filteredVoters: ", filteredVoters);
+      .filter(voter => {
+        console.log (voter.name, voter.race);
+          return (raceFilter ? voter.race === raceFilter : true)})
+      .filter(voter =>
+        socioeconomicFilter
+          ? voter.socioeconomic_status === socioeconomicFilter
+          : true
+      );
+
+    setFilteredVoters(List(filtered));
+  }, [
+    partyFilter,
+    registrationFilter,
+    ageRangeFilter,
+    raceFilter,
+    socioeconomicFilter
+  ]);
+
+//  console.log("filtVoters: ", filtered);
+
 
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
@@ -170,19 +173,25 @@ const App = () => {
               Filter Voters
             </button>
           </Row>
-          <>
             <Modal show={modal} handleClose={e => handleModalClose(e)}>
-              {mode === "filter" && (
-                <VotersFilters 
-                  voters={filteredVoters.length ? filteredVoters : voters }
-                  setFilteredVoters={setFilteredVoters} />
-              )}
+              <VotersFilters
+                registrationFilter={registrationFilter}
+                setRegistrationFilter={setRegistrationFilter}
+                ageRangeFilter={ageRangeFilter}
+                setAgeRangeFilter={setAgeRangeFilter}
+                raceFilter={raceFilter}
+                setRaceFilter={setRaceFilter}
+                socioeconomicFilter={socioeconomicFilter}
+                setSocioeconomicFilter={setSocioeconomicFilter}
+                partyFilter={partyFilter}
+                setPartyFilter={setPartyFilter}
+              />
               <div className="voters-list-container" style={{background: 'beige'}}>
                 <h2>Voters</h2>
-                <VotersList voters={filteredVoters} />
+                <VotersList
+                  voters={!filteredVoters.isEmpty() ? filteredVoters : filteredVoters} />
               </div>
             </Modal>
-          </>
           <Row>
             <MDBCol md="8">
             </MDBCol>

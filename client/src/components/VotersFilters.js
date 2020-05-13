@@ -12,49 +12,23 @@ import {
 } from "reactstrap";
 import { filterStyle } from "./UIDesign";
 
-export default function VotersFilters({ voters, setFilteredVoters, filteredVoters }) {
-  const toggle = dropdown => setCurrentDropdown(dropdown);
-
+export default function VotersFilters({
+  registrationFilter,
+  setRegistrationFilter,
+  ageRangeFilter,
+  setAgeRangeFilter,
+  raceFilter,
+  setRaceFilter,
+  socioeconomicFilter,
+  setSocioeconomicFilter,
+  partyFilter,
+  setPartyFilter
+}) {
   const [show, setShow] = useState(false);
   const [currentDropdown, setCurrentDropdown] = useState("");
-  const [registrationFilter, setRegistrationFilter] = useState(null);
-  const [ageRangeFilter, setAgeRangeFilter] = useState({});
-  const [raceFilter, setRaceFilter] = useState(null);
-  const [socioeconomicFilter, setSocioeconomicFilter] = useState(null);
-  const [partyFilter, setPartyFilter] = useState(null);
-  
-  useEffect(() => {
-    console.log("voters: ", voters);
-    const filteredVoters = voters
-      .filter(voter => (partyFilter ? voter.party === partyFilter : true))
-      .filter(voter =>
-        registrationFilter !== null
-          ? voter.regstration_status === registrationFilter
-          : true
-      )
-      .filter(voter => {
-        if (!ageRangeFilter.max) return true;
-        const age = parseInt(voter.age_range);
+  const [mode, setMode] = useState("view");
 
-        return age >= ageRangeFilter.min && age <= ageRangeFilter.max;
-      })
-
-      .filter(voter => (raceFilter ? voter.race === raceFilter : true))
-      .filter(voter =>
-        socioeconomicFilter
-          ? voter.socioeconomic_status === socioeconomicFilter
-          : true
-      );
-    console.log("filteredVoters: ", filteredVoters);
-    setFilteredVoters(filteredVoters);
-  }, [
-    partyFilter,
-    registrationFilter,
-    ageRangeFilter,
-    raceFilter,
-    socioeconomicFilter
-  ]);
-
+  const toggle = dropdown => setCurrentDropdown(dropdown);
 
   return (
     <div className="searchField">
@@ -186,7 +160,7 @@ export default function VotersFilters({ voters, setFilteredVoters, filteredVoter
                 <DropdownItem
                   onClick={() => {
                     setRaceFilter(
-                      "American Indian or Alaska Native"
+                      "Native"
                     );
                   }}
                 >
@@ -203,7 +177,8 @@ export default function VotersFilters({ voters, setFilteredVoters, filteredVoter
                 </DropdownItem>
                 <DropdownItem
                   onClick={() => {
-                    setRaceFilter("Black or African American");
+                    setRaceFilter("Black");
+                    console.log (raceFilter);
                   }}
                 >
                   {" "}
@@ -211,7 +186,7 @@ export default function VotersFilters({ voters, setFilteredVoters, filteredVoter
                 </DropdownItem>
                 <DropdownItem
                   onClick={() => {
-                    setRaceFilter("Hispanic or Latino");
+                    setRaceFilter("Latino");
                   }}
                 >
                   {" "}
@@ -276,7 +251,6 @@ export default function VotersFilters({ voters, setFilteredVoters, filteredVoter
           </ListGroup>
         </Col>
       </Row>
-    </div>
-  )
+</div>
+)
 }
-
