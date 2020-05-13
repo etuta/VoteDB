@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+// eslint-disable-next-line
 import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
-import styled from "styled-components";
-import { MDBCol, MDBInput } from "mdbreact";
+//import styled from "styled-components";
+import { MDBCol } from "mdbreact";
 import { List } from "immutable";
 import { headerStyle, introStyle, filterStyle } from "./components/UIDesign";
 import SearchBar from "./components/SearchBar";
@@ -19,7 +20,6 @@ import {
   Row,
   Col,
   ListGroup,
-  ListGroupItem,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -30,11 +30,12 @@ Geocode.setLanguage("en");
 Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 //Private API Key
 
-const Button = styled.button``;
+//const Button = styled.button``;
 
 const App = () => {
+  // eslint-disable-next-line
   const [target, setTarget] = useState(null);
-  const [dropdownOpen, setOpen] = useState(false);
+  //const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());

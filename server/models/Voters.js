@@ -15,12 +15,17 @@ class Voters extends Model {
       required: [
         'name',
         'address',
+
         'email',
+        'times_contacted',
+
         'party',
         'regstration_status',
         'age_range',
         'race',
         'socioeconomic_status',
+
+        'email',
       ],
 
       properties: {
