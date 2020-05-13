@@ -1,28 +1,27 @@
 /* eslint-disable arrow-body-style */
-const request = require('supertest');
-const { app, knex } = require('./routes');
+const request = require("supertest");
+const { app, knex } = require("./routes");
 
 const voter = {
-  id: '1',
-  name: 'Jim Halpert',
-  address: '14 Old Chapel Rd., Middlebury, VT 05753',
-  email: 'eosorio@middlebury.edu',
-  party: 'Democrat',
-  regstration_status: 'Registered',
-  age_range: '18-34',
-  race: 'White',
-  socioeconomic_status: 'upper',
+  name: "Jim Halpert",
+  address: "14 Old Chapel Rd., Middlebury, VT 05753",
+  email: "eosorio@middlebury.edu",
+  party: "Democrat",
+  regstration_status: "Registered",
+  age_range: "18-34",
+  race: "White",
+  socioeconomic_status: "upper"
 };
 
 test('Server "smoke" test', () => {
   expect(app).toBeDefined();
 });
 
-test('dotenv configured', () => {
+test("dotenv configured", () => {
   expect(process.env.MY_SECRET).toBeDefined();
 });
 
-describe('Voters API', () => {
+describe("Voters API", () => {
   beforeEach(() => {
     return knex.migrate
       .rollback()
@@ -37,11 +36,11 @@ describe('Voters API', () => {
   // SuperTest has several helpful methods for conveniently testing responses
   // that we can use to make the tests more concise
 
-  test('GET /api/voters should return all voters', () => {
+  test("GET /api/voters should return all voters", () => {
     return request(app)
-      .get('/api/voters')
+      .get("/api/voters")
       .expect(200)
-      .expect('Content-Type', /json/)
+      .expect("Content-Type", /json/)
       .expect([{ id: 1, ...voter }]);
   });
 });
