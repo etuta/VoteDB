@@ -4,11 +4,11 @@ module.exports = {
   test: {
     client: "sqlite3",
     connection: {
-      filename: "./voters.db"
+      filename: "./voters-test.db"
     },
     useNullAsDefault: true,
     seeds: {
-      directory: "./seeds/load-voters"
+      directory: "./seeds/test"
     }
   },
   development: {
