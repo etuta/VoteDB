@@ -15,7 +15,7 @@ class Voters extends Model {
       required: [
         "name",
         "address",
-        "times_contacted",
+        "email",
         "party",
         "regstration_status",
         "age_range",
@@ -27,9 +27,9 @@ class Voters extends Model {
         id: { type: "integer" },
         name: { type: "string" },
         address: { type: "text" },
-        times_contacted: { type: "integer" },
+        email: { type: "string" },
         party: { type: "string" },
-        registration_status: { type: "boolean" },
+        registration_status: { type: "string" },
         age_range: { type: "string" },
         race: { type: "string" },
         socioeconomic_status: { type: "string" }

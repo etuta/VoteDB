@@ -2,9 +2,9 @@
   {
     "name": "Jim Halpert",
     "address": "14 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "1",
+    "email": "eosorio@middlebury.edu",
     "party": "Democrat",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "18-34",
     "race": "White",
     "socioeconomic_status": "upper"
@@ -12,9 +12,9 @@
   {
     "name": "Michael Scott",
     "address": "16 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "0",
+    "email": "osorioelva@gmail.com",
     "party": "Democrat",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -22,9 +22,9 @@
   {
     "name": "Pam Beesly",
     "address": "14 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "3",
+    "email": "elsammyosorio@hotmail.com",
     "party": "Republican",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "18-34",
     "race": "White",
     "socioeconomic_status": "lower"
@@ -32,9 +32,9 @@
   {
     "name": "Dwight Schrute",
     "address": "17 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "1",
+    "email": "rbabu@middlebury.edu",
     "party": "Republican",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "upper"
@@ -42,9 +42,9 @@
   {
     "name": "Angela Martin",
     "address": "17 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "2",
+    "email": "williamk@middlebury.edu",
     "party": "Republican",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "35-50",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -52,9 +52,9 @@
   {
     "name": "Andy Bernard",
     "address": "24 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "2",
+    "email": "etuta@middlebury.com",
     "party": "Republican",
-    "registration_status": "Not Registered",
+    "regstration_status": "Not Registered",
     "age_range": "51-70",
     "race": "White",
     "socioeconomic_status": "lower"
@@ -62,9 +62,9 @@
   {
     "name": "Stanley Hudson",
     "address": "7 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "5",
+    "email": "mkawano@middlebury.edu",
     "party": "Independent",
-    "registration_status": "Not Registered",
+    "regstration_status": "Not Registered",
     "age_range": "51-70",
     "race": "Black",
     "socioeconomic_status": "upper"
@@ -72,9 +72,9 @@
   {
     "name": "Phyllis Smith",
     "address": "3 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "6",
+    "email": "jvillalobos@middlebury.edu",
     "party": "55",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "51-70",
     "race": "White",
     "socioeconomic_status": "mid"
@@ -82,9 +82,9 @@
   {
     "name": "Creed Bratton",
     "address": "34 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "0",
+    "email": "sgrandas@middlebury.edu",
     "party": "Independent",
-    "registration_status": "Not Registered",
+    "regstration_status": "Not Registered",
     "age_range": "71-90",
     "race": "Asian",
     "socioeconomic_status": "lower"
@@ -92,9 +92,9 @@
   {
     "name": "Oscar Martinez",
     "address": "18 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "4",
+    "email": "wghirmai@middlebury.edu",
     "party": "Republican",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "18-34",
     "race": "Latino",
     "socioeconomic_status": "upper"
@@ -102,9 +102,9 @@
   {
     "name": "Daryl Phylbin",
     "address": "20 Old Chapel Rd., Middlebury, VT 05753",
-    "times_contacted": "3",
+    "email": "elvajgomez@gmail.com",
     "party": "Democrat",
-    "registration_status": "Registered",
+    "regstration_status": "Registered",
     "age_range": "18-34",
     "race": "Black",
     "socioeconomic_status": "mid"

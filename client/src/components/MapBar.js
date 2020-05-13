@@ -1,7 +1,7 @@
 import React from "react";
 import { Map, TileLayer } from "react-leaflet";
-// Can also import Marker, Popup
 import Location from "./Location.js";
+import PropTypes from "prop-types";
 
 function MapBar({ latitude, longitude, zoom, select }) {
   const locateUser = {
@@ -22,5 +22,12 @@ function MapBar({ latitude, longitude, zoom, select }) {
     </Map>
   );
 }
+
+MapBar.propTypes = {
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired,
+  select: PropTypes.func.isRequired
+};
 
 export default MapBar;

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { withLeaflet } from "react-leaflet";
 import Locate from "leaflet.locatecontrol";
+import PropTypes from "prop-types";
 
 const LocateControl = props => {
   useEffect(() => {
@@ -13,6 +14,13 @@ const LocateControl = props => {
   }, []);
 
   return null;
+};
+
+LocateControl.propTypes = {
+  options: PropTypes.any.isRequired,
+  leaflet: PropTypes.object.isRequired
+  // map: PropTypes.isRequired
+  //Expected in the Object leaflet:proptypes.object. Inside the leaflet object, like Map.
 };
 
 export default withLeaflet(LocateControl);

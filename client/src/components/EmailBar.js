@@ -56,7 +56,19 @@ function EmailBar() {
     return output;
   };
 
+  const getVoterEmails = array => {
+    const output = [];
+    for (var i = 0; i < array.length; i++) {
+      output.push([array[i].name, array[i].email]);
+    }
+    return output;
+  };
+
   const tableRows = getContactInfo(selectedVoters);
+  const voterEmails = getVoterEmails(selectedVoters);
+
+  console.log(selectedVoters[0]);
+  // console.log(voterEmails);
 
   const fetchUserClick = click => {
     if (!highlight) {
@@ -187,21 +199,28 @@ function EmailBar() {
   const handleSend = e => {
     e.preventDefault();
 
-    let email = "roshan@twinkids.com";
-    //Placeholder for now
+    const voter_emails = [];
+    //Placeholder
 
-    var params = {
-      email: email,
-      name: name,
-      message: message
-    };
+    for (var i = 0; i < voter_emails.length; i++) {
+      let email = voter_emails[i];
 
-    emailjs.send(
-      "contact_service",
-      "contact_form",
-      params,
-      "user_C9EJhitygT2N6VxxaQJTE"
-    );
+      // let email = "roshan@twinkids.com";
+      // //Placeholder for now
+
+      var params = {
+        email: email,
+        name: name,
+        message: message
+      };
+
+      emailjs.send(
+        "contact_service",
+        "contact_form",
+        params,
+        "user_C9EJhitygT2N6VxxaQJTE"
+      );
+    }
 
     alert("Successfully sent");
 

@@ -1,6 +1,16 @@
 // Update with your config settings.
 
 module.exports = {
+  test: {
+    client: "sqlite3",
+    connection: {
+      filename: "./voters.db"
+    },
+    useNullAsDefault: true,
+    seeds: {
+      directory: "./seeds/load-voters"
+    }
+  },
   development: {
     client: "sqlite3",
     connection: {
