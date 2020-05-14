@@ -9,8 +9,6 @@ import PropTypes from "prop-types";
 function EmailBar() {
   const [modal, setModal] = useState(false);
   const [selectedVoters, setSelectedVoters] = useState([]);
-  //Should be a list of filtered voters. Currently showing all voters
-
   const [highlight, setHighlight] = useState(false);
 
   const [name, setName] = useState("");
