@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import MapBar from "./MapBar.js";
-import Location from "./Location.js";
 
 const latitude = 54.526;
 const longitude = -105.2551;
@@ -49,10 +48,9 @@ describe("MapBar components and PropTypes", () => {
       expect(map.find("Map").prop("center")).toEqual([latitude, longitude]);
     });
 
-    // test("", () => {
-    //   simulate('click');
-    //   expect(selectCall).toHaveBeenCalledTimes(1);
-    // });
+    test("Without a mouse click, selectCall has not be called", () => {
+      expect(selectCall).toHaveBeenCalledTimes(0);
+    });
 
     describe("Location (i.e. LocateUser) tests", () => {
       test("Location is initialized", () => {

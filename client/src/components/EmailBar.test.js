@@ -74,13 +74,6 @@ describe("SearchBar features and PropTypes", () => {
       expect(emailBar.find("Modal").prop("show")).toBe(false);
     });
 
-    // test("", () => {
-    //   // const sendEmail = expect(emailBar.find('Form').prop('onSubmit()'));
-    //   // const submitButton = emailBar.find('button[className="submitButton"]');
-    //   // submitButton.simulate('click');
-    //   // expect(sendEmail).toHaveBeenCalledTimes(1);
-    // });
-
     describe("Table rendering tests", () => {
       test("Table, tbody and tr are present", () => {
         expect(emailBar).toContainMatchingElement('table[className="table"]');
