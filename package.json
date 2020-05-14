@@ -43,27 +43,5 @@
       "prettier --write"
     ]
   },
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.4.1",
-    "emailjs-com": "^2.4.1",
-    "express": "^4.17.1",
-    "express-handlebars": "^4.0.4",
-    "google-maps-react": "^2.0.6",
-    "knex": "^0.21.1",
-    "leaflet": "^1.6.0",
-    "map": "^1.0.1",
-    "mdbreact": "^4.25.5",
-    "nodemailer": "^6.4.6",
-    "pg": "^8.0.3",
-    "react-geocode": "^0.2.1",
-    "react-google-maps": "^9.4.5",
-    "react-leaflet": "^2.6.3",
-    "react-native": "^0.62.2",
-    "reactstrap": "^8.4.1",
-    "save": "^2.4.0",
-    "sqlite3": "^4.2.0",
-    "styled": "^1.0.0",
-    "styled-components": "^5.1.0"
-  }
+  "dependencies": {}
 }
