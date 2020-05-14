@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { MDBCol } from "mdbreact";
 import { Row } from "reactstrap";
-//import data from "../seed.json";
+import PropTypes from "prop-types";
+
 
 function SearchBar({ select }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,6 +23,7 @@ function SearchBar({ select }) {
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
     };
+    fetchData();
   }, []);
 
   const handleSearchLocation = () => {
@@ -64,7 +66,7 @@ function SearchBar({ select }) {
             handleSearchLocation();
           }}
           margin-right="40px"
-          variant="Search on the Map"
+          variant="Search location on the Map"
         >
           Search
         </button>{" "}
@@ -88,7 +90,7 @@ function SearchBar({ select }) {
             handleSearchPerson();
           }}
           margin-right="40px"
-          variant="Search on the Map"
+          variant="Search person on the Map"
         >
           Search
         </button>{" "}
@@ -96,5 +98,9 @@ function SearchBar({ select }) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  select: PropTypes.func.isRequired
+};
 
 export default SearchBar;

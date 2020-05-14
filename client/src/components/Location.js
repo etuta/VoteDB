@@ -9,7 +9,8 @@ const LocateControl = props => {
 
     const location = new Locate(options);
     location.addTo(map);
-  }, [props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 };
