@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-
 import React, { useState, useEffect } from "react";
 import { Row, Form, FormGroup, Input, Label } from "reactstrap";
 import Modal from "./Modal.js";
 import { emailStyle } from "./UIDesign.js";
 import emailjs from "emailjs-com";
+import PropTypes from "prop-types";
 
 function EmailBar() {
   const [modal, setModal] = useState(false);
@@ -45,18 +45,10 @@ function EmailBar() {
 
   const handleModalClose = () => {
     setModal(false);
+    handleReset();
   };
 
   const getContactInfo = array => {
-    const output = [];
-    for (var i = 0; i < array.length; i++) {
-      output.push([array[i].name, array[i].address]);
-      //Currently using address in place of email
-    }
-    return output;
-  };
-
-  const getVoterEmails = array => {
     const output = [];
     for (var i = 0; i < array.length; i++) {
       output.push([array[i].name, array[i].email]);
@@ -65,10 +57,6 @@ function EmailBar() {
   };
 
   const tableRows = getContactInfo(selectedVoters);
-  const voterEmails = getVoterEmails(selectedVoters);
-
-  console.log(selectedVoters[0]);
-  // console.log(voterEmails);
 
   const fetchUserClick = click => {
     if (!highlight) {
@@ -179,7 +167,7 @@ function EmailBar() {
     return (
       <tr>
         <td className="headings">{"Name"}</td>
-        <td className="headings">{"Address"}</td>
+        <td className="headings">{"Email Address"}</td>
       </tr>
     );
   };
@@ -199,18 +187,13 @@ function EmailBar() {
   const handleSend = e => {
     e.preventDefault();
 
-    const voter_emails = [];
-    //Placeholder
-
-    for (var i = 0; i < voter_emails.length; i++) {
-      let email = voter_emails[i];
-
-      // let email = "roshan@twinkids.com";
-      // //Placeholder for now
+    for (var i = 0; i < addressArray.length; i++) {
+      let recipientEmail = addressArray[i];
+      let recipientName = namesArray[i];
 
       var params = {
-        email: email,
-        name: name,
+        email: recipientEmail,
+        name: recipientName,
         message: message
       };
 
@@ -223,9 +206,7 @@ function EmailBar() {
     }
 
     alert("Successfully sent");
-
     handleModalClose();
-    handleReset();
   };
 
   return (
@@ -279,7 +260,7 @@ function EmailBar() {
                 <Input
                   type="textarea"
                   name="message"
-                  value={message.value}
+                  value={message}
                   onChange={event => setMessage(event.target.value)}
                 />
               </FormGroup>
@@ -297,5 +278,7 @@ function EmailBar() {
     </div>
   );
 }
+
+EmailBar.propTypes = {};
 
 export default EmailBar;

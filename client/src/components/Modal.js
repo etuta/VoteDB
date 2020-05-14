@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Modal = ({ handleClose, show, children }) => {
   const handleShow = show ? "modal d-block" : "modal d-none";
@@ -16,6 +17,12 @@ const Modal = ({ handleClose, show, children }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  children: PropTypes.any
 };
 
 export default Modal;
