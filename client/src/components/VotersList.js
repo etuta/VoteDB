@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function VotersList({ voters }) {
   return (
@@ -7,5 +7,5 @@ export default function VotersList({ voters }) {
         <p key={id}>{name}</p>
       ))}
     </div>
-  )
+  );
 }

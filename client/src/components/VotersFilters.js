@@ -37,9 +37,7 @@ export default function VotersFilters({
               isOpen={currentDropdown === "1"}
               toggle={setCurrentDropdown.bind(this, "1")}
             >
-              <DropdownToggle caret>
-                Party Affiliation
-              </DropdownToggle>
+              <DropdownToggle caret>Party Affiliation</DropdownToggle>
               <DropdownMenu>
                 <DropdownItem
                   onClick={() => {
@@ -69,9 +67,7 @@ export default function VotersFilters({
               isOpen={currentDropdown === "2"}
               toggle={setCurrentDropdown.bind(this, "2")}
             >
-              <DropdownToggle caret>
-                Registration Status
-              </DropdownToggle>
+              <DropdownToggle caret>Registration Status</DropdownToggle>
               <DropdownMenu>
                 <DropdownItem
                   onClick={() => {
@@ -156,9 +152,7 @@ export default function VotersFilters({
               <DropdownMenu>
                 <DropdownItem
                   onClick={() => {
-                    setRaceFilter(
-                      "Native"
-                    );
+                    setRaceFilter("Native");
                   }}
                 >
                   {" "}
@@ -175,7 +169,7 @@ export default function VotersFilters({
                 <DropdownItem
                   onClick={() => {
                     setRaceFilter("Black");
-                    console.log (raceFilter);
+                    console.log(raceFilter);
                   }}
                 >
                   {" "}
@@ -191,9 +185,7 @@ export default function VotersFilters({
                 </DropdownItem>
                 <DropdownItem
                   onClick={() => {
-                    setRaceFilter(
-                      "Native Hawaiian or Other Pacific Islander"
-                    );
+                    setRaceFilter("Native Hawaiian or Other Pacific Islander");
                   }}
                 >
                   {" "}
@@ -214,10 +206,7 @@ export default function VotersFilters({
               isOpen={currentDropdown === "5"}
               toggle={setCurrentDropdown.bind(this, "5")}
             >
-              <DropdownToggle caret>
-                {" "}
-                Socioeconomic status{" "}
-              </DropdownToggle>
+              <DropdownToggle caret> Socioeconomic status </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem
                   onClick={() => {
@@ -248,6 +237,6 @@ export default function VotersFilters({
           </ListGroup>
         </Col>
       </Row>
-</div>
-)
+    </div>
+  );
 }

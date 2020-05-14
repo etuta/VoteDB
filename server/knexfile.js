@@ -2,26 +2,26 @@
 
 module.exports = {
   test: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './voters-test.db',
+      filename: "./voters-test.db"
     },
     useNullAsDefault: true,
     seeds: {
-      directory: './seeds/test',
-    },
+      directory: "./seeds/test"
+    }
   },
   development: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './voters.db',
+      filename: "./voters.db"
     },
-    useNullAsDefault: true,
+    useNullAsDefault: true
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: process.env.DATABASE_URL,
-    ssl: true,
-  },
+    ssl: true
+  }
 };

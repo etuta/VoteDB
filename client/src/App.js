@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line
-//import data from "./seed.json";
+
 import Geocode from "react-geocode";
 import "./App.css";
 //import styled from "styled-components";
@@ -13,7 +12,7 @@ import MapBar from "./components/MapBar";
 import Modal from "./components/Modal";
 import VotersFilters from "./components/VotersFilters";
 import VotersList from "./components/VotersList";
-import { get } from './api/httpclient';
+import { get } from "./api/httpclient";
 
 import {
   Container,
@@ -29,14 +28,14 @@ Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 const App = () => {
   // eslint-disable-next-line
   const [target, setTarget] = useState(null);
-  //const [dropdownOpen, setOpen] = useState(false);
+  // const [dropdownOpen, setOpen] = useState(false);
   const [mapCollection, setMapCollection] = useState([]);
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
   const [setMode] = useState("view");
 
-  console.log('filteredVoters', filteredVoters.isEmpty());
+  console.log("filteredVoters", filteredVoters.isEmpty());
 
   const [registrationFilter, setRegistrationFilter] = useState(null);
   const [ageRangeFilter, setAgeRangeFilter] = useState({});
@@ -45,7 +44,7 @@ const App = () => {
   const [partyFilter, setPartyFilter] = useState(null);
 
   useEffect(() => {
-    (()=> {
+    (() => {
       get("/api/voters/")
         .then(response => {
           if (!response.ok) {
@@ -57,9 +56,8 @@ const App = () => {
           setVoters(List(data));
         })
         .catch(err => console.log(err)); // eslint-disable-line no-console
-    })()
+    })();
   }, []);
-
 
   useEffect(() => {
     const filtered = voters
@@ -77,8 +75,9 @@ const App = () => {
       })
 
       .filter(voter => {
-        console.log (voter.name, voter.race);
-          return (raceFilter ? voter.race === raceFilter : true)})
+        console.log(voter.name, voter.race);
+        return raceFilter ? voter.race === raceFilter : true;
+      })
       .filter(voter =>
         socioeconomicFilter
           ? voter.socioeconomic_status === socioeconomicFilter
@@ -95,23 +94,11 @@ const App = () => {
     socioeconomicFilter
   ]);
 
-//  console.log("filtVoters: ", filtered);
-
-
   //Default: overview of North America
   const [latitude, setLatitude] = useState(54.526);
   const [longitude, setLongitude] = useState(-105.2551);
   const [zoom, setZoom] = useState(3);
 
-  //  const target = useRef(null);
-  // TODO: not used
-//  const ref = useRef(null);
-
-  // TODO: not used
-  // const handleClick = event => {
-  //   setShow(!show);
-  //   setTarget(event.target);
-  // };
 
   const handleMapClick = click => {
     //User can choose any five points on the map
@@ -130,7 +117,7 @@ const App = () => {
         const { lat, lng } = response.results[0].geometry.location;
         setLatitude(lat);
         setLongitude(lng);
-        setZoom(12);
+        setZoom(20);
       },
       error => {
         alert(
@@ -155,20 +142,21 @@ const App = () => {
         <div className="wallpaper">
           <h1 style={headerStyle}>Voter App</h1>
           <h5 style={introStyle}> Every vote counts </h5>
-          <Row>
-            <SearchBar select={input => changeLocation(input)} />
-            <button
-              className="button"
-              onClick={() => {
-                setMode("filter");
-                handleModalOpen();
-              }}
-              margin-left="400px"
-              variant="Search by Filters:"
-            >
-              Filter Voters
-            </button>
-          </Row>
+          <div className="searchField">
+            <Row>
+              <SearchBar select={input => changeLocation(input)} />
+              <button
+                className="button"
+                onClick={() => {
+                  setMode("filter");
+                  handleModalOpen();
+                }}
+                margin-left="400px"
+                variant="Search by Filters:"
+              >
+                Filter Voters
+              </button>
+            </Row>
             <Modal show={modal} handleClose={e => handleModalClose(e)}>
               <VotersFilters
                 registrationFilter={registrationFilter}
@@ -182,16 +170,28 @@ const App = () => {
                 partyFilter={partyFilter}
                 setPartyFilter={setPartyFilter}
               />
-              <div className="voters-list-container" style={{background: 'beige'}}>
+              <div
+                className="voters-list-container"
+                style={{ background: "beige" }}
+              >
                 <h2>Voters</h2>
                 <VotersList
-                  voters={!filteredVoters.isEmpty() ? filteredVoters : filteredVoters} />
+                  voters={
+                    !filteredVoters.isEmpty() ? filteredVoters : filteredVoters
+                  }
+                />
               </div>
             </Modal>
-          <Row>
-            <MDBCol md="8">
-            </MDBCol>
-          </Row>
+            <Row>
+              <MDBCol md="8"></MDBCol>
+              <div>
+                {filteredVoters.map(({ id, name }) => (
+                  <p key={id}>{name}</p>
+                ))}
+              </div>
+            </Row>
+          </div>
+          <p></p>
           <Row>
             <MapBar
               latitude={latitude}
