@@ -20,3 +20,5 @@ script:
 env:
   jobs:
     - MY_SECRET=test
+    - EXTEND_ESLINT=true
+    - SKIP_PREFLIGHT_CHECK=true

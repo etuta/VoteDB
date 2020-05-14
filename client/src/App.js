@@ -23,8 +23,6 @@ Geocode.setLanguage("en");
 Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 //Private API Key
 
-//const Button = styled.button``;
-
 const App = () => {
   // eslint-disable-next-line
   const [target, setTarget] = useState(null);
@@ -33,7 +31,7 @@ const App = () => {
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
-  const [setMode] = useState("view");
+  const [mode, setMode] = useState("view");
 
   console.log("filteredVoters", filteredVoters.isEmpty());
 
