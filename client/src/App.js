@@ -6,7 +6,7 @@ import "./App.css";
 //import styled from "styled-components";
 import { MDBCol } from "mdbreact";
 import { List } from "immutable";
-import { headerStyle, introStyle, filterStyle } from "./components/UIDesign";
+import { headerStyle, introStyle } from "./components/UIDesign";
 import SearchBar from "./components/SearchBar";
 import EmailBar from "./components/EmailBar";
 import MapBar from "./components/MapBar";
@@ -18,12 +18,6 @@ import { get } from './api/httpclient';
 import {
   Container,
   Row,
-  Col,
-  ListGroup,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from "reactstrap";
 
 Geocode.setLanguage("en");
@@ -40,7 +34,7 @@ const App = () => {
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
-  const [mode, setMode] = useState("view");
+  const [setMode] = useState("view");
 
   console.log('filteredVoters', filteredVoters.isEmpty());
 
@@ -93,6 +87,7 @@ const App = () => {
 
     setFilteredVoters(List(filtered));
   }, [
+    voters,
     partyFilter,
     registrationFilter,
     ageRangeFilter,

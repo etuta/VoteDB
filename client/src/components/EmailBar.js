@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Form, FormGroup, Input, Label, Button } from "reactstrap";
+import { Row, Form, FormGroup, Input, Label } from "reactstrap";
 //import data from "../seed.json";
 import Modal from "./Modal.js";
 import { emailStyle } from "./UIDesign.js";

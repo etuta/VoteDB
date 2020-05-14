@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MDBCol, MDBInput } from "mdbreact";
+import { MDBCol } from "mdbreact";
 import { Row } from "reactstrap";
 //import data from "../seed.json";
 
