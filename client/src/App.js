@@ -1,12 +1,12 @@
+/* eslint-disable */
+
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line
-// import data from "./seed.json";
 import Geocode from "react-geocode";
 import "./App.css";
 //import styled from "styled-components";
 import { MDBCol } from "mdbreact";
 import { List } from "immutable";
-import { headerStyle, introStyle, filterStyle } from "./components/UIDesign";
+import { headerStyle, introStyle } from "./components/UIDesign";
 import SearchBar from "./components/SearchBar";
 import EmailBar from "./components/EmailBar";
 import MapBar from "./components/MapBar";
@@ -17,20 +17,18 @@ import { get } from "./api/httpclient";
 
 import {
   Container,
-  Row,
-  Col,
-  ListGroup,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Row
+  // Col,
+  // ListGroup,
+  // ButtonDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem
 } from "reactstrap";
 
 Geocode.setLanguage("en");
 Geocode.setApiKey("AIzaSyCUoSNNknN6UL2JS_BK_MUC79gp4M6eq4g");
 //Private API Key
-
-//const Button = styled.button``;
 
 const App = () => {
   // eslint-disable-next-line
@@ -40,9 +38,11 @@ const App = () => {
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
+  // eslint-disable-next-line
+
   const [mode, setMode] = useState("view");
 
-  console.log("filteredVoters", filteredVoters.isEmpty());
+  // console.log('filteredVoters', filteredVoters.isEmpty());
 
   const [registrationFilter, setRegistrationFilter] = useState(null);
   const [ageRangeFilter, setAgeRangeFilter] = useState({});
@@ -216,3 +216,5 @@ const App = () => {
 };
 
 export default App;
+
+/* eslint-enable */

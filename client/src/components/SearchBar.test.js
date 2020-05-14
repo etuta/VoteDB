@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import SearchBar from "./SearchBar.js";
 
 describe("SearchBar features and PropTypes", () => {
