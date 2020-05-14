@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import Modal from "./Modal.js";
 
 describe("Modal components and PropTypes", () => {

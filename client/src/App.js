@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable */
 
+import React, { useState, useEffect } from "react";
 import Geocode from "react-geocode";
 import "./App.css";
 //import styled from "styled-components";
@@ -16,7 +17,13 @@ import { get } from "./api/httpclient";
 
 import {
   Container,
-  Row,
+  Row
+  // Col,
+  // ListGroup,
+  // ButtonDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem
 } from "reactstrap";
 
 Geocode.setLanguage("en");
@@ -31,9 +38,11 @@ const App = () => {
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
+  // eslint-disable-next-line
+
   const [mode, setMode] = useState("view");
 
-  console.log("filteredVoters", filteredVoters.isEmpty());
+  // console.log('filteredVoters', filteredVoters.isEmpty());
 
   const [registrationFilter, setRegistrationFilter] = useState(null);
   const [ageRangeFilter, setAgeRangeFilter] = useState({});
@@ -61,9 +70,9 @@ const App = () => {
     const filtered = voters
       .filter(voter => (partyFilter ? voter.party === partyFilter : true))
       .filter(voter =>
-        (registrationFilter !== null
+        registrationFilter !== null
           ? voter.regstration_status === registrationFilter
-          : true)
+          : true
       )
       .filter(voter => {
         if (!ageRangeFilter.max) return true;
@@ -84,7 +93,6 @@ const App = () => {
 
     setFilteredVoters(List(filtered));
   }, [
-    voters,
     partyFilter,
     registrationFilter,
     ageRangeFilter,
@@ -96,7 +104,6 @@ const App = () => {
   const [latitude, setLatitude] = useState(54.526);
   const [longitude, setLongitude] = useState(-105.2551);
   const [zoom, setZoom] = useState(3);
-
 
   const handleMapClick = click => {
     //User can choose any five points on the map
@@ -209,3 +216,5 @@ const App = () => {
 };
 
 export default App;
+
+/* eslint-enable */

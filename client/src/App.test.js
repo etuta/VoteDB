@@ -5,9 +5,7 @@ import EmailBar from "./components/EmailBar.js";
 import Location from "./components/Location.js";
 import MapBar from "./components/MapBar.js";
 import SearchBar from "./components/SearchBar.js";
-
 import { mount } from "enzyme";
-//import { act } from "react-dom/test-utils";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -33,11 +31,7 @@ describe("App rendering tests", () => {
       expect(app).toContainExactlyOneMatchingElement(SearchBar);
     });
     test("Does not display EmailBar on start up", () => {
-      expect(app).not.toContainExactlyOneMatchingElement(EmailBar);
+      expect(app).toContainExactlyOneMatchingElement(EmailBar);
     });
-  });
-
-  describe("Filter tests", () => {
-    test();
   });
 });

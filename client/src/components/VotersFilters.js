@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import {
+  Container,
   Row,
   Col,
   ListGroup,
+  ListGroupItem,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -22,10 +25,11 @@ export default function VotersFilters({
   partyFilter,
   setPartyFilter
 }) {
-
+  const [show, setShow] = useState(false);
   const [currentDropdown, setCurrentDropdown] = useState("");
+  const [mode, setMode] = useState("view");
 
-//  const toggle = dropdown => setCurrentDropdown(dropdown);
+  const toggle = dropdown => setCurrentDropdown(dropdown);
 
   return (
     <div className="searchField">
