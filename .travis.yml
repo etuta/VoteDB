@@ -17,8 +17,3 @@ script:
   - npm test --prefix server
   - npm run lint --prefix server
   - npm run build --prefix client
-env:
-  jobs:
-    - MY_SECRET=test
-    - EXTEND_ESLINT=true
-    - SKIP_PREFLIGHT_CHECK=true
