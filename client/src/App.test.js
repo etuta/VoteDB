@@ -7,7 +7,7 @@ import MapBar from "./components/MapBar.js";
 import SearchBar from "./components/SearchBar.js";
 
 import { mount } from "enzyme";
-import { act } from "react-dom/test-utils";
+//import { act } from "react-dom/test-utils";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

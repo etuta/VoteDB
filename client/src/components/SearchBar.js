@@ -3,6 +3,7 @@ import { MDBCol } from "mdbreact";
 import { Row } from "reactstrap";
 import PropTypes from "prop-types";
 
+
 function SearchBar({ select }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchPerson, setSearchPerson] = useState("");

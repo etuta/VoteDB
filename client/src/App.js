@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line
-// import data from "./seed.json";
+
 import Geocode from "react-geocode";
 import "./App.css";
 //import styled from "styled-components";
 import { MDBCol } from "mdbreact";
 import { List } from "immutable";
-import { headerStyle, introStyle, filterStyle } from "./components/UIDesign";
+import { headerStyle, introStyle } from "./components/UIDesign";
 import SearchBar from "./components/SearchBar";
 import EmailBar from "./components/EmailBar";
 import MapBar from "./components/MapBar";
@@ -18,12 +17,6 @@ import { get } from "./api/httpclient";
 import {
   Container,
   Row,
-  Col,
-  ListGroup,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from "reactstrap";
 
 Geocode.setLanguage("en");
@@ -40,7 +33,7 @@ const App = () => {
   const [voters, setVoters] = useState(List());
   const [filteredVoters, setFilteredVoters] = useState(List());
   const [modal, setModal] = useState(false);
-  const [mode, setMode] = useState("view");
+  const [setMode] = useState("view");
 
   console.log("filteredVoters", filteredVoters.isEmpty());
 
@@ -70,9 +63,9 @@ const App = () => {
     const filtered = voters
       .filter(voter => (partyFilter ? voter.party === partyFilter : true))
       .filter(voter =>
-        registrationFilter !== null
+        (registrationFilter !== null
           ? voter.regstration_status === registrationFilter
-          : true
+          : true)
       )
       .filter(voter => {
         if (!ageRangeFilter.max) return true;
@@ -93,6 +86,7 @@ const App = () => {
 
     setFilteredVoters(List(filtered));
   }, [
+    voters,
     partyFilter,
     registrationFilter,
     ageRangeFilter,
@@ -104,6 +98,7 @@ const App = () => {
   const [latitude, setLatitude] = useState(54.526);
   const [longitude, setLongitude] = useState(-105.2551);
   const [zoom, setZoom] = useState(3);
+
 
   const handleMapClick = click => {
     //User can choose any five points on the map
