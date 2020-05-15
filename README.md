@@ -8,7 +8,7 @@ square on a city map that generates a list of addresses of registered Democrats 
 supporters.
   - Social media integration
 
-View the app [https://safe-lake-95812.herokuapp.com/?fbclid=IwAR3ErmPQOgyQtrJ-nqKkSjN2mWEEmfcW1GLcB1v9zO1qO3M1u-XE_zUtGPI](https://git.heroku.com/safe-lake-95812.git).
+View the app https://safe-lake-95812.herokuapp.com/?fbclid=IwAR3ErmPQOgyQtrJ-nqKkSjN2mWEEmfcW1GLcB1v9zO1qO3M1u-XE_zUtGPI
 
 
 ## Installing (and Adding) Dependencies
