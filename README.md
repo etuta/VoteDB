@@ -1,4 +1,4 @@
-# fp-voterapp
+# VoteDB
 
 The purpose of this application is to package publicly available Voter Registration data,
 along with GIS mapping tool in order to allow political organizers to identify and reach out to their voting base in the most efficient ways possible. The features provided by this tool includes:
@@ -11,8 +11,9 @@ supporters.
 View the app https://safe-lake-95812.herokuapp.com/?fbclid=IwAR3ErmPQOgyQtrJ-nqKkSjN2mWEEmfcW1GLcB1v9zO1qO3M1u-XE_zUtGPI
 
 Important disclaimers: 
-We set up an external tool to handle email sending. This service is EmailJS, which let us connect an email client (i.e. fp.voterapp@gmail.com) in the browser. Upon completion of this course, this service will no longer be available. As such, to enable email sending functionality, new developers must create their own EmailJS account with a client email, and replace user id on line 204 in client/src/components/EmailBar.js with their own. 
-Furthermore, the VoterApp team made use of Google Maps Geocoding API to convert voter addresses into coordinates to center the map. Like with EmailJS, this service will no longer be available after May 15th 2020. To enable geocoding and access to the Google Maps Plaform, new developers must create a project with a billing account and replace Geocoding API key on line 30 in client/src/App.js with their own. 
+We set up an external tool to handle email sending. This service is EmailJS, which let us connect an email client (i.e. fp.
+pp@gmail.com) in the browser. Upon completion of this course, this service will no longer be available. As such, to enable email sending functionality, new developers must create their own EmailJS account with a client email, and replace user id on line 204 in client/src/components/EmailBar.js with their own. 
+Furthermore, the VoteDB team made use of Google Maps Geocoding API to convert voter addresses into coordinates to center the map. Like with EmailJS, this service will no longer be available after May 15th 2020. To enable geocoding and access to the Google Maps Plaform, new developers must create a project with a billing account and replace Geocoding API key on line 30 in client/src/App.js with their own. 
 
 ## Installing (and Adding) Dependencies
 
