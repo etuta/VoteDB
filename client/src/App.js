@@ -145,7 +145,7 @@ const App = () => {
     <Container>
       <div className="App">
         <div className="wallpaper">
-          <h1 style={headerStyle}>Voter App</h1>
+          <h1 style={headerStyle}>VoteDB</h1>
           <h5 style={introStyle}> Every vote counts </h5>
           <div className="searchField">
             <Row>
